@@ -1,1 +1,17 @@
 language: java
+notifications:
+  slack:
+    secure: WzdS5sSSQziwbZwqW8nCddRGC8SSrgcPyVn9NbV2MOkqa4mFawQOL05CCOc0RfV7otCCqxsDqXAehuyKzEVA8VrQ1g10Eelppbnv9WxDYzIj1M2MPmyo4RzHK6+aw0KRIujufgYQdxit+N/J2xATnUy+3hiXBQprCnIGXYaNk2w=
+  hipchat:
+    rooms:
+      secure: A0rtcc5iWVOiKodiYxX8DzNn777k2boUWILXtfEKKXqHzxENYaj5EHeMT+kC+2F/rnnjS79fMFD9VU4d/dbjiQH4wzHMPA5gBGpOpb+q0zbLTxt4sYmn+9HqVoIu774ZSBkX1fh5y/MM6qrjUJbPLMuBylM88PhYu95hGL7TW1w=
+deploy:
+  provider: releases
+  api_key:
+    secure: ONqiWtKOUxqBVbJ8QLlo99sU0TikincSzeMCMHPpeGfMocMkfNKlMNGK1RGhH50MOc2ELmhm1eBBLKQgoTvQSHOXWltlgPTpBzN5yaRQm+Qe6oau/sdiYdw0+ItawWEHEJPP0Pyv1/mtg8JsdfT/WQbRa1z5fskA0oGAgmPXLVg=
+  file: build/libs/xlr-servicenow-plugin-1.0.jar
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: true
+    repo: xebialabs-community/xlr-servicenow-plugin
