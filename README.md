@@ -1,6 +1,6 @@
 # Build status #
 
-[![Build Status](https://travis-ci.org/xebialabs-community/xld-servicenow-plugin.svg?branch=master)](https://travis-ci.org/xebialabs-community/xld-servicenow-plugin)
+[![Build Status](https://travis-ci.org/xebialabs-community/xlr-servicenow-plugin.svg?branch=master)](https://travis-ci.org/xebialabs-community/xlr-servicenow-plugin)
 
 # Preface #
 
