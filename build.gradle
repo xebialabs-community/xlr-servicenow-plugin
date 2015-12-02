@@ -1,16 +1,15 @@
-buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath "nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0"
-  }
+plugins {
+    id "com.github.hierynomus.license" version "0.11.0"
 }
 
-version=1.0
+defaultTasks 'build'
 
-apply plugin: "com.github.hierynomus.license"
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+version=1.0
 
 license {
     header rootProject.file('src/main/license/xebialabs_community.license')
