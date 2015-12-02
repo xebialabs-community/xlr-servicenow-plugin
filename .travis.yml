@@ -10,7 +10,7 @@ deploy:
   provider: releases
   api_key:
     secure: ONqiWtKOUxqBVbJ8QLlo99sU0TikincSzeMCMHPpeGfMocMkfNKlMNGK1RGhH50MOc2ELmhm1eBBLKQgoTvQSHOXWltlgPTpBzN5yaRQm+Qe6oau/sdiYdw0+ItawWEHEJPP0Pyv1/mtg8JsdfT/WQbRa1z5fskA0oGAgmPXLVg=
-  file: build/libs/xlr-servicenow-plugin-1.0.jar
+  file: build/libs/xlr-servicenow-plugin-1.1.0.jar
   skip_cleanup: true
   on:
     all_branches: true
