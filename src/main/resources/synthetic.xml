@@ -8,13 +8,16 @@
 -->
 <synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<type type="servicenow.CreateRecord" extends="xlrelease.PythonScript">
-        <property name="scriptLocation" default="servicenow/CreateRecord.py" hidden="true" />
+	<type type="servicenow.Task" extends="xlrelease.PythonScript" virtual="true">
         <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
 
         <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
         <property name="username" category="input" label="username" required="true" />
         <property name="password" password="true" category="input" required="true" />
+    </type>
+
+    <type type="servicenow.CreateRecord" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/CreateRecord.py" hidden="true" />
 
         <property name="tableName" category="input" label="Table Name" required="true" />
         <property name="shortDescription" category="input" label="Short Description" required="true" />
@@ -23,13 +26,8 @@
         <property name="sysId" category="output"/> 
     </type>
 
-    <type type="servicenow.CheckStatus" extends="xlrelease.PythonScript">
+    <type type="servicenow.CheckStatus" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/CheckStatus.py" hidden="true" />
-        <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
-
-        <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
-        <property name="username" category="input" label="username" required="true" />
-        <property name="password" password="true" category="input" required="true" />
 
         <property name="tableName" category="input" label="Table Name" required="true" />
         <property name="sysId" category="input" label="System ID" required="true" />
@@ -37,13 +35,8 @@
         <property name="status" category="output"/> 
     </type>
 
-    <type type="servicenow.RequestApproval" extends="xlrelease.PythonScript">
+    <type type="servicenow.RequestApproval" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/RequestApproval.py" hidden="true" />
-        <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
-
-        <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
-        <property name="username" category="input" label="username" required="true" />
-        <property name="password" password="true" category="input" required="true" />
 
         <property name="shortDescription" category="input" label="Short Description" required="true" />
         <property name="description" category="input" label="Description" required="true" />
@@ -51,13 +44,8 @@
         <property name="sysId" category="output"/> 
     </type>
 
-    <type type="servicenow.UpdateCMDB" extends="xlrelease.PythonScript">
+    <type type="servicenow.UpdateCMDB" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/UpdateCMDB.py" hidden="true" />
-        <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
-
-        <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
-        <property name="username" category="input" label="username" required="true" />
-        <property name="password" password="true" category="input" required="true" />
 
         <property name="environment" category="input" label="Environment" required="true" />
         <property name="applicationName" category="input" label="Application Name" required="true" />
@@ -70,6 +58,16 @@
         <property name="cfSpace" category="input" label="CF Space" required="false" />
 
         <property name="sysId" category="output"/> 
+    </type>
+
+    <type type="servicenow.GetChangeRequest" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/GetChangeRequest.py" hidden="true" />
+
+        <property name="tableName" category="input" hidden="true" default="change_request" required="true" />
+        <property name="number" category="input" label="Number" required="true" />
+        <property name="fieldNames" category="input" label="Field Names" required="true" description="Comma separated list of field names to be displayed"/>
+
+
     </type>
 
 	<type type="servicenow.Server" extends="configuration.HttpConnection"/>
