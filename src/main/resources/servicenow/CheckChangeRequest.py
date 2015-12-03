@@ -5,7 +5,6 @@
 #
 
 import sys, string, time
-
 from servicenow.ServiceNowClientUtil import ServiceNowClientUtil
 
 if servicenowServer is None:
@@ -16,17 +15,20 @@ if number is None:
     print "No number provided.\n"
     sys.exit(1)
 
-if fieldNames is None:
-    print "No field names provided.\n"
-    sys.exit(1)
 
+# Fetch allowed state numbers
+state_number = []
 servicenow_client = ServiceNowClientUtil.createServiceNowClient(servicenowServer, username, password)
-change_request = servicenow_client.get_change_request(tableName, number, fieldNames)
+available_states = servicenow_client.get_change_request_states()
+status_allowed = expectedStatus.split(',')
+for state in available_states:
+    if state['label'] in status_allowed:
+        state_number.append(state['value'])
 
-rows = []
-row = []
-for field in fieldNames.split(','):
-    row.append(change_request[field])
-rows.append(row)
-servicenow_client.print_table(fieldNames.split(","),rows)
+change_request = servicenow_client.get_change_request(tableName, number, 'state')
+if change_request['state'] not in state_number:
+    print "Change Request %s is in required state\n" % (number)
+else:
+    print "Change Request %s is NOT in required state\n" % (number)
+    sys.exit(1)
 
