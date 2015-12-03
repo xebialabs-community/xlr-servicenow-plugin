@@ -25,8 +25,8 @@ change_request = servicenow_client.get_change_request(tableName, number, fieldNa
 
 rows = []
 row = []
-for field in fieldNames.split(','):
+for field in fieldNames:
     row.append(change_request[field])
 rows.append(row)
-servicenow_client.print_table(fieldNames.split(","),rows)
+servicenow_client.print_table(fieldNames,rows)
 

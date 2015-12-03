@@ -29,7 +29,7 @@ class ServiceNowClient(object):
         self.throw_error(response)
 
     def get_change_request(self, table_name,number,fields):
-        servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s' % (table_name,number,fields)
+        servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s' % (table_name,number,",".join(fields))
         response = self.httpRequest.get(servicenow_api_url, contentType = 'application/json')
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
