@@ -25,7 +25,7 @@ for state in available_states:
     if state['label'] in status_allowed:
         state_number.append(state['value'])
 
-change_request = servicenow_client.get_change_request(tableName, number, 'state')
+change_request = servicenow_client.get_change_request(tableName, number, ['state'])
 if change_request['state'] not in state_number:
     print "Change Request %s is in required state\n" % (number)
 else:

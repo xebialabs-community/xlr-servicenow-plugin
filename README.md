@@ -12,6 +12,10 @@ See the **XL Release Reference Manual** for background information on XL Release
 
 The xlr-servicenow-plugin is a XL Release plugin that allows to create records on a ServiceNow instance.
 
+# Requirements #
+
+This plugin requires XLR 4.8
+
 ## Types ##
 
 + Create Record
