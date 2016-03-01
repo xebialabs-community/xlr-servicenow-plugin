@@ -26,6 +26,17 @@
         <property name="sysId" category="output"/> 
     </type>
 
+    <type type="servicenow.CreateRequest" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/CreateRequest.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" required="true" />
+        <property name="shortDescription" category="input" label="Short Description" required="true" />
+        <property name="comments" category="input" label="Comments" required="true" />
+
+        <property name="sysId" category="output"/>
+        <property name="Ticket" category="output"/>
+    </type>
+
     <type type="servicenow.CheckStatus" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/CheckStatus.py" hidden="true" />
 
@@ -42,6 +53,19 @@
         <property name="description" category="input" label="Description" required="true" />
 
         <property name="sysId" category="output"/> 
+    </type>
+
+    <type type="servicenow.PollingCheckStatus" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/PollingCheckStatus.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" required="true" />
+        <property name="sysId" category="input" label="System ID" required="true" />
+        <property name="pollInterval" category="input" kind="integer" label="Polling Interval" required="true" default="30" />
+        <property name="statusField" category="input" label="Status Field" required="true" default="state" />
+        <property name="checkForStatus" category="input" label="Status Value to check for" required="true" />
+
+        <property name="status" category="output"/>
+        <property name="ticket" category="output"/>
     </type>
 
     <type type="servicenow.UpdateCMDB" extends="servicenow.Task">
@@ -77,5 +101,14 @@
         <property name="number" category="input" label="Number" required="true" />
     </type>
 
-	<type type="servicenow.Server" extends="configuration.HttpConnection"/>
+    <type type="servicenow.Server" extends="configuration.HttpConnection">
+        <property name="changeRecordTableName" 
+                  label="Change Record Table Name (Required for Generate Release)" 
+                  required="true" 
+                  default="change_request"/>
+        <property name="changeTaskTableName" 
+                  label="Change Task Table Name (Required for Generate Release)" 
+                  required="true" 
+                  default="change_task" />
+    </type>
 </synthetic>
