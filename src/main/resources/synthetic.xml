@@ -72,7 +72,7 @@
         <property name="scriptLocation" default="servicenow/CheckChangeRequest.py" hidden="true" />
 
         <property name="tableName" category="input" hidden="true" default="change_request" required="true" />
-        <property name="expectedStatus" category="input" default="Closed Complete,Closed Incomplete, Closed Skipped" hidden="true"/>
+        <property name="expectedStatus" category="input" default="Closed Complete,Closed Incomplete,Closed Skipped" hidden="true"/>
 
         <property name="number" category="input" label="Number" required="true" />
     </type>
