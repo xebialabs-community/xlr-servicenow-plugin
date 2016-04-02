@@ -8,7 +8,7 @@
 -->
 <synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<type type="servicenow.Task" extends="xlrelease.PythonScript" virtual="true">
+    <type type="servicenow.Task" extends="xlrelease.PythonScript" virtual="true">
         <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
 
         <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
@@ -78,7 +78,7 @@
 
         <property name="shortDescription" category="input" label="Short Description" required="true" />
         <property name="description" category="input" label="Description" required="true" />
-        <property name="content" default="{\"short_description\":\"%s\",\"description\":\"%s\",\"category\":\"XLDeploy\",\"u_supporting_service\":\"Exchange Support\",\"assignment_group\":\"Global Software Change Group\",\"justification\":\"XLDeploy\",\"requested_by_date\":\"08-08-2014\"}" category="input" hidden="true" />
+        <property name="content" default="{&quot;short_description&quot;:&quot;%s&quot;,&quot;description&quot;:&quot;%s&quot;,&quot;category&quot;:&quot;XLDeploy&quot;,&quot;u_supporting_service&quot;:&quot;Exchange Support&quot;,&quot;assignment_group&quot;:&quot;Global Software Change Group&quot;,&quot;justification&quot;:&quot;XLDeploy&quot;,&quot;requested_by_date&quot;:&quot;08-08-2014&quot;}" category="input" hidden="true" />
 
         <property name="sysId" category="output"/>
         <property name="ticket" category="output"/>
@@ -131,13 +131,7 @@
     </type>
 
     <type type="servicenow.Server" extends="configuration.HttpConnection">
-        <property name="changeRecordTableName" 
-                  label="Change Record Table Name (Required for Generate Release)" 
-                  required="true" 
-                  default="change_request"/>
-        <property name="changeTaskTableName" 
-                  label="Change Task Table Name (Required for Generate Release)" 
-                  required="true" 
-                  default="change_task" />
+        <property name="changeRecordTableName" label="Change Record Table Name (Required for Generate Release)" required="true" default="change_request"/>
+        <property name="changeTaskTableName" label="Change Task Table Name (Required for Generate Release)" required="true" default="change_task" />
     </type>
 </synthetic>
