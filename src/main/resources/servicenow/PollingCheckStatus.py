@@ -4,7 +4,7 @@
 # FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
 #
 
-import sys, string, time
+import sys, string, time, traceback
 import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
@@ -29,9 +29,11 @@ while ( not isClear ):
          print json.dumps(data, indent=4, sort_keys=True)
          isClear = True
     # End if
-  except:
-        print json.dumps(data, indent=4, sort_keys=True)
-        print "Error finding status for %s" % statusField
+  except Exception, e:
+    exc_info = sys.exc_info()
+    traceback.print_exception( *exc_info )
+    print e
+    print "Error finding status for %s" % statusField
   # End try
 
   time.sleep( pollInterval )

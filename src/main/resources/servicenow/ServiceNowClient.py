@@ -63,8 +63,8 @@ class ServiceNowClient(object):
         # End if
     #End create_record
 
-    def update_record(self, table_name, content):
-        servicenow_api_url = '/api/now/v1/table/%s' % (table_name)
+    def update_record(self, table_name, sysId, content):
+        servicenow_api_url = '/api/now/v1/table/%s/%s' % (table_name, sysId)
         print "servicenow_api_url = %s" % (servicenow_api_url)
         response = self.httpRequest.put(servicenow_api_url, body = content, contentType = 'application/json')
 

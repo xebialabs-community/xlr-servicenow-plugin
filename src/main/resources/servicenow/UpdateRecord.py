@@ -18,11 +18,9 @@ snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 print "Sending content %s" % content
 
 try:
-    data = snClient.update_record( tableName, content )
+    data = snClient.update_record( tableName, sysId, content )
     print "Returned DATA = %s" % (data)
     print json.dumps(data, indent=4, sort_keys=True)
-    print "Created %s in Service Now." % (sysId)
-    print "Created %s in Service Now." % (Ticket)
 except Exception, e:
     exc_info = sys.exc_info()
     traceback.print_exception( *exc_info )
