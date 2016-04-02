@@ -78,7 +78,7 @@
 
         <property name="shortDescription" category="input" label="Short Description" required="true" />
         <property name="description" category="input" label="Description" required="true" />
-        <property name="content" ="{\"short_description\":\"%s\",\"description\":\"%s\",\"category\":\"XLDeploy\",\"u_supporting_service\":\"Exchange Support\",\"assignment_group\":\"Global Software Change Group\",\"justification\":\"XLDeploy\",\"requested_by_date\":\"08-08-2014\"}" category="input" default=" hidden="true" />
+        <property name="content" default="{\"short_description\":\"%s\",\"description\":\"%s\",\"category\":\"XLDeploy\",\"u_supporting_service\":\"Exchange Support\",\"assignment_group\":\"Global Software Change Group\",\"justification\":\"XLDeploy\",\"requested_by_date\":\"08-08-2014\"}" category="input" hidden="true" />
 
         <property name="sysId" category="output"/>
         <property name="ticket" category="output"/>
