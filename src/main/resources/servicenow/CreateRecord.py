@@ -6,8 +6,7 @@
 
 import sys, string, time
 import com.xhaus.jyson.JysonCodec as json
-
-RECORD_CREATED_STATUS = 201
+from servicenow.ServiceNowClient import ServiceNowClient
 
 if servicenowServer is None:
     print "No server provided."

@@ -12,19 +12,27 @@ if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
+isClear = False
 snClient = ServiceNowClient.create_client(servicenowServer, username, password)
-content = None
 
-print "Sending content %s" % content
+while ( not isClear ):
 
-try:
+  try:
     data = snClient.get_change_request(tableName, sysId)
+
     status = data[statusField]
-    ticket = data['number']
-    print "Found %s in Service Now." % (sysId)
-    print json.dumps(data, indent=4, sort_keys=True)
-except:
-    print json.dumps(data, indent=4, sort_keys=True)
-    print "Error finding status for %s" % statusField
-    sys.exit(1)
-# End try
+    if status == checkForStatus :
+         print "Found %s in Service Now." % (sysId)
+         status = data[statusField]
+         ticket = data["number"]
+         print "Found %s in Service Now." % (sysId)
+         print json.dumps(data, indent=4, sort_keys=True)
+         isClear = True
+    # End if
+  except:
+        print json.dumps(data, indent=4, sort_keys=True)
+        print "Error finding status for %s" % statusField
+  # End try
+
+  time.sleep( pollInterval )
+# End While
