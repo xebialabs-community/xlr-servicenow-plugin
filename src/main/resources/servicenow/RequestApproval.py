@@ -20,8 +20,19 @@ if content is None:
     print "No content provided."
     sys.exit(1)
 
+if shortDescription is None:
+    print "No shortDescription provided."
+    sys.exit(1)
+
+if description is None:
+    print "No description provided."
+    sys.exit(1)
+
 snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 contentJSON = content % (shortDescription, description)
+sysId = None
+
+content = content % (shortDescription, description)
 
 print "Sending content %s" % content
 
@@ -41,20 +52,17 @@ except Exception, e:
     sys.exit(1)
 
 isClear = False
-snClient = ServiceNowClient.create_client(servicenowServer, username, password)
-
 while ( not isClear ):
 
   try:
     data = snClient.get_change_request(tableName, sysId)
 
     status = data["approval"]
-    print "Found %s in Service Now." % (sysId)
+    print "Found %s in Service Now as %s" % (data['number'], status)
     if "approved" == status:
         approval = False
         isClear = True
         print "ServiceNow approval received."
-        status = data[statusField]
         ticket = data["number"]
     elif "rejected" == status:
         print "Failed to get approval from ServiceNow"

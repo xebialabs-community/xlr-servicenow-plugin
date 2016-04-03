@@ -19,13 +19,17 @@ snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 data = ""
 
 try:
-    available_states = snClient.get_change_request_states()
-    status_allowed = expectedStatus.split(',')
-    for state in available_states:
-        if state['label'] in status_allowed:
-            state_number.append(state['value'])
-
     change_request = snClient.get_change_request(tableName, number, ['state'])
+    status = data["approval"]
+    print "Found %s in Service Now as %s" % (data['number'], status)
+    if "approved" == status:
+        approval = False
+        isClear = True
+        print "ServiceNow approval received."
+    elif "rejected" == status:
+        print "Failed to get approval from ServiceNow"
+        sys.exit(1)
+ 
     if change_request['state'] not in state_number:
         print "Change Request %s is in required state\n" % (number)
     else:
@@ -35,10 +39,8 @@ try:
     print "\n"
     print snClient.print_record( change_request )
 except Exception, e:
-    exc_info = sys.exc_info()
-    traceback.print_exception( *exc_info )
     print e
-    print "Error finding status for %s" % statusField
+    print "Error finding status for %s" % number
 # End try
 
 

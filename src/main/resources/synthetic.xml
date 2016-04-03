@@ -81,6 +81,7 @@
         <property name="shortDescription" category="input" label="Short Description" required="true" />
         <property name="description" category="input" label="Description" required="true" />
         <property name="content" default="{&quot;short_description&quot;:&quot;%s&quot;,&quot;description&quot;:&quot;%s&quot;,&quot;category&quot;:&quot;XLDeploy&quot;,&quot;u_supporting_service&quot;:&quot;Exchange Support&quot;,&quot;assignment_group&quot;:&quot;Global Software Change Group&quot;,&quot;justification&quot;:&quot;XLDeploy&quot;,&quot;requested_by_date&quot;:&quot;08-08-2014&quot;}" category="input" hidden="true" />
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
 
         <property name="sysId" category="output"/>
         <property name="ticket" category="output"/>

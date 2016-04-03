@@ -21,14 +21,12 @@ content = """
 print "Sending content %s" % content
 
 try:
-    data = snClient.update_record( 'cmdb_ci_appl', content )
-    print "Returned DATA = %s" % (data)
-    print json.dumps(data, indent=4, sort_keys=True)
+    data = snClient.create_record( 'cmdb_ci_appl', content )
+    #data = snClient.update_record( 'cmdb_ci_appl', content )
     sysId = data["sys_id"]
-    print "Created %s in Service Now." % (sysId)
+    print "#Created %s in Service Now.#\n" % (sysId)
+    print snClient.print_record( data )
 except Exception, e:
-    exc_info = sys.exc_info()
-    traceback.print_exception( *exc_info )
     print e
     print "Failed to create record in Service Now"
     sys.exit(1)
