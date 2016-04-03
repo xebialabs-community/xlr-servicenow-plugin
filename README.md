@@ -14,6 +14,9 @@ The xlr-servicenow-plugin is a XL Release plugin that allows to work with record
 
 ![image](images/ReleaseExample.png)
 
+You can download an example template at the link as follows:
+[ServiceNow_Example.xlr](images/ServiceNow_Example.xlr)
+
 # Requirements #
 
 This plugin (v3.x) requires XLR 4.8
