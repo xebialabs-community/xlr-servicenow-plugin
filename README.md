@@ -56,3 +56,7 @@ This plugin (v3.x) requires XLR 4.8
 
 + Request Approval
 + Update CMDB
+
+#References#
+1. [Service Now REST API Wiki](http://wiki.servicenow.com/index.php?title=Table_API#gsc.tab=0)
+
