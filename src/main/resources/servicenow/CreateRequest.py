@@ -22,12 +22,12 @@ print "Sending content %s" % content
 
 try:
     data = snClient.create_record( tableName, content )
-    print "Returned DATA = %s" % (data)
-    print json.dumps(data, indent=4, sort_keys=True)
     sysId = data["sys_id"]
     Ticket = data["number"]
     print "Created %s in Service Now." % (sysId)
     print "Created %s in Service Now." % (Ticket)
+    print "\n"
+    print snClient.print_record( data )
 except Exception, e:
     exc_info = sys.exc_info()
     traceback.print_exception( *exc_info )

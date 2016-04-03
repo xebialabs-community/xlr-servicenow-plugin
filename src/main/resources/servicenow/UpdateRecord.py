@@ -19,8 +19,8 @@ print "Sending content %s" % content
 
 try:
     data = snClient.update_record( tableName, sysId, content )
-    print "Returned DATA = %s" % (data)
-    print json.dumps(data, indent=4, sort_keys=True)
+    print "\n"
+    print snClient.print_record( data )
 except Exception, e:
     exc_info = sys.exc_info()
     traceback.print_exception( *exc_info )

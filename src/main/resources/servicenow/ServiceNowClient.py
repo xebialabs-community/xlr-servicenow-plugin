@@ -50,13 +50,10 @@ class ServiceNowClient(object):
         
     def create_record(self, table_name, content):
         servicenow_api_url = '/api/now/v1/table/%s' % (table_name)
-        print "servicenow_api_url = %s" % (servicenow_api_url)
         response = self.httpRequest.post(servicenow_api_url, body = content, contentType = 'application/json')
 
         if response.getStatus() == RECORD_CREATED_STATUS:
             data = json.loads(response.getResponse())
-            print "DATA = %s" % ( data )
-            json.dumps(data, indent=4, sort_keys=True)
             return data['result']
         else:
             self.throw_error(response)
@@ -65,13 +62,10 @@ class ServiceNowClient(object):
 
     def update_record(self, table_name, sysId, content):
         servicenow_api_url = '/api/now/v1/table/%s/%s' % (table_name, sysId)
-        print "servicenow_api_url = %s" % (servicenow_api_url)
         response = self.httpRequest.put(servicenow_api_url, body = content, contentType = 'application/json')
 
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
-            print "DATA = %s" % ( data )
-            json.dumps(data, indent=4, sort_keys=True)
             return data['result']
         else:
             self.throw_error(response)
@@ -84,6 +78,29 @@ class ServiceNowClient(object):
         for r in rows:
             print "| ", "  |".join(r), " |"
         print "\n"
+
+    def print_record( self, myObj, outStr = "", prefix="", header=True ):
+       if header:
+          outStr = "%s| Key | Value |\n" % (outStr)
+          outStr = "%s| --- | --- |\n" % (outStr)
+       if type(myObj) is dict:
+          for key in myObj.iterkeys():
+              value = myObj[key]
+              if type(value) is dict or type(value) is list:
+                 p = "%s%s." % (prefix, key)
+                 outStr =  "%s| %s%s |\n%s" % (outStr, prefix, key, self.print_record( value, "", p, False ) )
+              else:
+                 p = "%s%s" % (prefix, key)
+                 outStr =  "%s| %s%s |%s |\n" % (outStr, prefix, key, value )
+                 
+       elif type(myObj) is list:
+          for value in myObj:
+              outStr = "%s| | %s\n" % (outStr, value)
+       else:
+          outStr = "%s%s" % (outStr, myObj)
+       # End if
+       return outStr
+
 
     def throw_error(self, response):
         print "Error from ServiceNow, HTTP Return: %s\n" % (response.getStatus())

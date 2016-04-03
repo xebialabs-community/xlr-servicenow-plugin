@@ -14,6 +14,7 @@ if servicenowServer is None:
 
 isClear = False
 snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+data = ""
 
 while ( not isClear ):
 
@@ -22,11 +23,9 @@ while ( not isClear ):
 
     status = data[statusField]
     if status == checkForStatus :
-         print "Found %s in Service Now." % (sysId)
          status = data[statusField]
          ticket = data["number"]
          print "Found %s in Service Now." % (sysId)
-         print json.dumps(data, indent=4, sort_keys=True)
          isClear = True
     # End if
   except Exception, e:
@@ -38,3 +37,5 @@ while ( not isClear ):
 
   time.sleep( pollInterval )
 # End While
+print "\n"
+print snClient.print_record( data )
