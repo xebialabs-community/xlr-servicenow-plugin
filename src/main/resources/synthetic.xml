@@ -19,7 +19,7 @@
     <type type="servicenow.CreateRecord" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/CreateRequest.py" hidden="true" />
 
-        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" />
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
         <property name="shortDescription" category="input" label="Short Description" required="true" />
         <property name="comments" category="input" label="Comments" required="true" />
 
@@ -30,7 +30,7 @@
     <type type="servicenow.CreateRequest" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/CreateRequest.py" hidden="true" />
 
-        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" />
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
         <property name="shortDescription" category="input" label="Short Description" required="true" />
         <property name="comments" category="input" label="Comments" required="true" />
 
@@ -41,7 +41,7 @@
     <type type="servicenow.UpdateRecord" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/UpdateRecord.py" hidden="true" />
 
-        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" />
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
         <property name="sysId"   category="input" required="true" />
         <property name="content" category="input" label="Request Content" required="true" size="large" />
 
