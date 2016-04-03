@@ -12,6 +12,18 @@ if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
+if sysId is None:
+    print "No sysId provided."
+    sys.exit(1)
+
+if tableName is None:
+    print "No tableName provided."
+    sys.exit(1)
+
+if pollInterval is None:
+    print "No pollInterval provided."
+    sys.exit(1)
+
 isClear = False
 snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 data = ""

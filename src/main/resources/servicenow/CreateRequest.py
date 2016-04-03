@@ -12,6 +12,18 @@ if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
+if tableName is None:
+    print "No tableName provided."
+    sys.exit(1)
+
+if shortDescription is None:
+    print "No shortDescription provided."
+    sys.exit(1)
+
+if comments is None:
+    print "No comments provided."
+    sys.exit(1)
+
 snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 content = """
