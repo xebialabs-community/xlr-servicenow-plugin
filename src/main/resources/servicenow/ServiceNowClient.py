@@ -6,8 +6,7 @@
 
 import sys
 import com.xhaus.jyson.JysonCodec as json
-
-from httputil.HttpRequest import HttpRequest
+from xlrelease.HttpRequest import HttpRequest
 
 SN_RESULT_STATUS = 200
 RECORD_CREATED_STATUS = 201
