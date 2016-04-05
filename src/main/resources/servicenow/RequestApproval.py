@@ -6,57 +6,73 @@
 
 import sys, string, time
 import com.xhaus.jyson.JysonCodec as json
-
-RECORD_CHECK_STATUS = 200
-RECORD_CREATED_STATUS = 201
+from servicenow.ServiceNowClient import ServiceNowClient
 
 if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
-servicenowUrl = servicenowServer['url']
+if tableName is None:
+    print "No tableName provided."
+    sys.exit(1)
 
-credentials = CredentialsFallback(servicenowServer, username, password).getCredentials()
-content = """
-{"short_description":"%s","description":"%s","category":"XLDeploy","u_supporting_service":"Exchange Support","assignment_group":"Global Software Change Group","justification":"XLDeploy","requested_by_date":"08-08-2014"}
-""" % (shortDescription, description)
+if content is None:
+    print "No content provided."
+    sys.exit(1)
+
+if shortDescription is None:
+    print "No shortDescription provided."
+    sys.exit(1)
+
+if description is None:
+    print "No description provided."
+    sys.exit(1)
+
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+contentJSON = content % (shortDescription, description)
+sysId = None
+
+content = content % (shortDescription, description)
 
 print "Sending content %s" % content
 
-servicenowAPIUrl = servicenowUrl + '/api/now/table/change_request'
-
-servicenowResponse = XLRequest(servicenowAPIUrl, 'POST', content, credentials['username'], credentials['password'], 'application/json').send()
-
-if servicenowResponse.status == RECORD_CREATED_STATUS:
-    data = json.loads(servicenowResponse.read())
-    sysId = data["result"]["sys_id"]
+try:
+    data = snClient.create_record( tableName, content )
+    print "Returned DATA = %s" % (data)
+    print json.dumps(data, indent=4, sort_keys=True)
+    sysId = data["sys_id"]
+    Ticket = data["number"]
     print "Created %s in Service Now." % (sysId)
-else:
-    print "Failed to create approval record in Service Now"
-    servicenowResponse.errorDump()
+    print "Created %s in Service Now." % (Ticket)
+except Exception, e:
+    exc_info = sys.exc_info()
+    traceback.print_exception( *exc_info )
+    print e
+    print "Failed to create record in Service Now"
     sys.exit(1)
 
-# Start query for approval
-servicenowAPIUrl = servicenowUrl + '/api/now/table/change_request/' + sysId
+isClear = False
+while ( not isClear ):
 
-approval = True
-content = None
+  try:
+    data = snClient.get_change_request(tableName, sysId)
 
-while(approval):
-   servicenowResponse = XLRequest(servicenowAPIUrl, 'GET', content, credentials['username'], credentials['password'], 'application/json').send()
-
-   if servicenowResponse.status == RECORD_CHECK_STATUS:
-      data = json.loads(servicenowResponse.read())
-      status = data["result"]["approval"]
-      print "Found %s in Service Now." % (status)
-      if "approved" == status:
+    status = data["approval"]
+    print "Found %s in Service Now as %s" % (data['number'], status)
+    if "approved" == status:
         approval = False
+        isClear = True
         print "ServiceNow approval received."
-      elif "rejected" == status:
+        ticket = data["number"]
+    elif "rejected" == status:
         print "Failed to get approval from ServiceNow"
         sys.exit(1)
-      else:
+    else:
         time.sleep(5) 
-   else:
-      print "Failed to check approval status on ServiceNow"
-      servicenowResponse.errorDump()
+
+  except:
+        print json.dumps(data, indent=4, sort_keys=True)
+        print "Error finding status for %s" % statusField
+  # End try
+
+# End While
