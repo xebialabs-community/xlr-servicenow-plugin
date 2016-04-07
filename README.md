@@ -57,6 +57,14 @@ This plugin (v3.x) requires XLR 4.8
 
 + Request Approval
 + Update CMDB
++ **Create Incident** - This task will create a new incident.
+
+	![image](images/CreateIncident.png)
+
++ **Update Incident** - This task will update an existing incident
+
+	![image](images/Updateincident.png)
+	
 
 #References#
 1. [Service Now REST API Wiki](http://wiki.servicenow.com/index.php?title=Table_API#gsc.tab=0)

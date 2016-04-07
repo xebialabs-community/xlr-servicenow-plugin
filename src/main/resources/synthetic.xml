@@ -133,6 +133,15 @@
         <property name="number" category="input" label="Number" required="true" />
     </type>
 
+    <type type="servicenow.CreateIncident" extends="servicenow.CreateRequest">
+        <property name="tableName" category="input" label="Table Name" default="incident" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.UpdateIncident" extends="servicenow.UpdateRecord">
+        <property name="tableName" category="input" label="Table Name" default="incident" required="true" hidden="true" />
+    </type>
+
+
     <type type="servicenow.Server" extends="configuration.HttpConnection">
         <property name="changeRecordTableName" 
                   label="Change Record Table Name (Required for Generate Release)" 
