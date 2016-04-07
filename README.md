@@ -63,7 +63,7 @@ This plugin (v3.x) requires XLR 4.8
 
 + **Update Incident** - This task will update an existing incident
 
-	![image](images/Updateincident.png)
+	![image](images/UpdateIncident.png)
 	
 
 #References#
