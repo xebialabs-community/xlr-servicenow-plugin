@@ -48,12 +48,23 @@ This plugin (v3.x) requires XLR 4.8
 	![image](images/UpdateRecord.png)
 	
 	By setting the Request Content you can change any fields in the ServiceNow change record
+	
++ **Find Change Request By Ticket** - Find the change request sysId using the change request ticket number.
+
+	![image](images/FindChangeRequestByTicket.png)
+	
 
 + **Update Task** - This task can be used to make changes to change tasks.
 
 	![image](images/UpdateTask.png)
 	
 	By setting the Request Content you can change any fields in the ServiceNow change task
+	
+	
++ **Find Change Task By Task Id** - Find the change request task sysId using the change task number
+
+	![image](images/FindChangeTaskByTaskId.png)
+	
 
 + Request Approval
 + Update CMDB
@@ -64,7 +75,12 @@ This plugin (v3.x) requires XLR 4.8
 + **Update Incident** - This task will update an existing incident
 
 	![image](images/UpdateIncident.png)
+
++ **Find Incident By Ticket** - This task will local the sysId of a incident record using the incident ticket number
+
+	![image](images/FindIncidentByTicket.png)
 	
+		
 
 #References#
 1. [Service Now REST API Wiki](http://wiki.servicenow.com/index.php?title=Table_API#gsc.tab=0)
