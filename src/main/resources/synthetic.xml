@@ -47,6 +47,15 @@
 
     </type>
 
+    <type type="servicenow.FindChangeRequestByTicket" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/FindRecord.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
+        <property name="ticket"   category="input" required="true" />
+
+        <property name="sysId" category="output"/>
+    </type>
+
     <type type="servicenow.CreateTask" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/CreateTask.py" hidden="true" />
 
@@ -139,6 +148,14 @@
 
     <type type="servicenow.UpdateIncident" extends="servicenow.UpdateRecord">
         <property name="tableName" category="input" label="Table Name" default="incident" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.FindIncidentByTicket" extends="servicenow.FindChangeRequestByTicket">
+        <property name="tableName" category="input" label="Table Name" default="incident" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.FindChangeTaskByTaskId" extends="servicenow.FindChangeRequestByTicket">
+        <property name="tableName" category="input" label="Table Name" default="change_task" required="true" hidden="true" />
     </type>
 
 

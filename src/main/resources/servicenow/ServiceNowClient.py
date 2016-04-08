@@ -71,6 +71,20 @@ class ServiceNowClient(object):
         # End if
     #End create_record
 
+    def find_record( self, table_name, query ):
+        servicenow_api_url = '/api/now/v1/table/%s?%s' % (table_name, query)
+        print "Servic Now URL = %s " % ( servicenow_api_url )
+        response = self.httpRequest.get( servicenow_api_url, contentType = 'application/json' )
+
+        if response.getStatus() == SN_RESULT_STATUS:
+            data = json.loads( response.getResponse() )
+            return data['result']
+        else:
+            print "find_record error %s" % ( response )
+            self.throw_error(response)
+        # End if
+    #End find_record
+
     def print_table(self, headers, rows):
         print "\n|", "|".join(headers), "|"
         print "|", " ------ |" * len(headers)
