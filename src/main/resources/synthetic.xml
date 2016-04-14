@@ -8,6 +8,13 @@
 -->
 <synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+<!--
+    #######################################################################################################################
+    #
+    #                 Classes that are subclassed 
+    #
+    #######################################################################################################################
+-->
     <type type="servicenow.Task" extends="xlrelease.PythonScript" virtual="true">
         <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
 
@@ -27,6 +34,32 @@
         <property name="Ticket" category="output"/>
     </type>
 
+    <type type="servicenow.UpdateRecord" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/UpdateRecord.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
+        <property name="sysId"   category="input" required="true" />
+        <property name="content" category="input" label="Request Content" required="true" size="large" />
+
+    </type>
+
+    <type type="servicenow.FindRecordByTicket" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/FindRecord.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
+        <property name="ticket"   category="input" required="true" />
+
+        <property name="sysId" category="output"/>
+    </type>
+
+<!--
+    #######################################################################################################################
+    #
+    #                  Legacy Tasks that should be depricated in favor for more descriptive ones
+    #
+    #######################################################################################################################
+-->
+
     <type type="servicenow.CreateRequest" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/CreateRequest.py" hidden="true" />
 
@@ -38,50 +71,30 @@
         <property name="Ticket" category="output"/>
     </type>
 
-    <type type="servicenow.UpdateRecord" extends="servicenow.Task">
-        <property name="scriptLocation" default="servicenow/UpdateRecord.py" hidden="true" />
+<!--
+    #######################################################################################################################
+--> 
 
+
+<!--
+    #######################################################################################################################
+    #    Change Requests
+    #######################################################################################################################
+--> 
+    <type type="servicenow.CreateChangeRequest" extends="servicenow.CreateRecord">
         <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
-        <property name="sysId"   category="input" required="true" />
-        <property name="content" category="input" label="Request Content" required="true" size="large" />
-
     </type>
 
-    <type type="servicenow.FindChangeRequestByTicket" extends="servicenow.Task">
-        <property name="scriptLocation" default="servicenow/FindRecord.py" hidden="true" />
-
+    <type type="servicenow.UpdateChangeRequest" extends="servicenow.UpdateRecord">
         <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
-        <property name="ticket"   category="input" required="true" />
-
-        <property name="sysId" category="output"/>
     </type>
 
-    <type type="servicenow.CreateTask" extends="servicenow.Task">
-        <property name="scriptLocation" default="servicenow/CreateTask.py" hidden="true" />
-
-        <property name="tableName" category="input" label="Table Name" required="true" default="change_task" hidden="true" />
-        <property name="content" category="input" label="Task JSON Content" required="true" size="large" />
-
-        <property name="taskId" category="output"/>
-        <property name="Task" category="output"/>
+    <type type="servicenow.FindChangeRequestByTicket" extends="servicenow.FindRecordByTicket">
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
     </type>
 
-    <type type="servicenow.UpdateTask" extends="servicenow.Task">
-        <property name="scriptLocation" default="servicenow/UpdateRecord.py" hidden="true" />
-
+    <type type="servicenow.FindChangeTaskByTaskId" extends="servicenow.FindRecordByTicket">
         <property name="tableName" category="input" label="Table Name" default="change_task" required="true" hidden="true" />
-        <property name="sysId"   category="input" required="true" />
-        <property name="content" category="input" label="Request Content" required="true" size="large" />
-
-    </type>
-
-    <type type="servicenow.CheckStatus" extends="servicenow.Task">
-        <property name="scriptLocation" default="servicenow/CheckStatus.py" hidden="true" />
-
-        <property name="tableName" category="input" label="Table Name" required="true" />
-        <property name="sysId" category="input" label="System ID" required="true" />
-
-        <property name="status" category="output"/> 
     </type>
 
     <type type="servicenow.RequestApproval" extends="servicenow.Task">
@@ -109,22 +122,6 @@
         <property name="ticket" category="output"/>
     </type>
 
-    <type type="servicenow.UpdateCMDB" extends="servicenow.Task">
-        <property name="scriptLocation" default="servicenow/UpdateCMDB.py" hidden="true" />
-
-        <property name="environment" category="input" label="Environment" required="true" />
-        <property name="applicationName" category="input" label="Application Name" required="true" />
-        <property name="company" category="input" label="Company" required="true" />
-        <property name="configAdminGroup" category="input" label="Config Admin Group" required="true" />
-        <property name="version" category="input" label="Version" required="true" />
-        <property name="virtualMachine" category="input" label="Virtual Machine" required="false" />
-        <property name="tomcat" category="input" label="Tomcat" required="false" />
-        <property name="mysql" category="input" label="MySql" required="false" />
-        <property name="cfSpace" category="input" label="CF Space" required="false" />
-
-        <property name="sysId" category="output"/> 
-    </type>
-
     <type type="servicenow.GetChangeRequest" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/GetChangeRequest.py" hidden="true" />
 
@@ -142,7 +139,40 @@
         <property name="number" category="input" label="Number" required="true" />
     </type>
 
-    <type type="servicenow.CreateIncident" extends="servicenow.CreateRequest">
+<!--
+    #######################################################################################################################
+    #    Change Request Tasks
+    #######################################################################################################################
+--> 
+    <type type="servicenow.CreateTask" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/CreateTask.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" required="true" default="change_task" hidden="true" />
+        <property name="content" category="input" label="Task JSON Content" required="true" size="large" />
+
+        <property name="taskId" category="output"/>
+        <property name="Task" category="output"/>
+    </type>
+
+    <type type="servicenow.UpdateTask" extends="servicenow.UpdateRecord">
+        <property name="tableName" category="input" label="Table Name" default="change_task" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.CheckStatus" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/CheckStatus.py" hidden="true" />
+
+        <property name="tableName" category="input" label="Table Name" required="true" />
+        <property name="sysId" category="input" label="System ID" required="true" />
+
+        <property name="status" category="output"/> 
+    </type>
+
+<!--
+    #######################################################################################################################
+    #    Incident Requests
+    #######################################################################################################################
+--> 
+    <type type="servicenow.CreateIncident" extends="servicenow.CreateRecord">
         <property name="tableName" category="input" label="Table Name" default="incident" required="true" hidden="true" />
     </type>
 
@@ -154,11 +184,67 @@
         <property name="tableName" category="input" label="Table Name" default="incident" required="true" hidden="true" />
     </type>
 
-    <type type="servicenow.FindChangeTaskByTaskId" extends="servicenow.FindChangeRequestByTicket">
-        <property name="tableName" category="input" label="Table Name" default="change_task" required="true" hidden="true" />
+<!--
+    #######################################################################################################################
+    #    Service Requests
+    #######################################################################################################################
+--> 
+    <type type="servicenow.CreateServiceRequest" extends="servicenow.CreateRecord">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.UpdateServiceRequest" extends="servicenow.UpdateRecord">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.FindServiceRequestItemByTicket" extends="servicenow.FindChangeRequestByTicket">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+    </type>
+
+<!--
+    #######################################################################################################################
+    #    Service Request Items
+    #######################################################################################################################
+--> 
+    <type type="servicenow.CreateRequestItem" extends="servicenow.CreateRecord">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.UpdateRequestItem" extends="servicenow.UpdateRecord">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+    </type>
+
+    <type type="servicenow.FindRequestItemByTicket" extends="servicenow.FindChangeRequestByTicket">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+    </type>
+
+<!--
+    #######################################################################################################################
+    #   CMDB 
+    #######################################################################################################################
+--> 
+    <type type="servicenow.UpdateCMDB" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/UpdateCMDB.py" hidden="true" />
+
+        <property name="environment"      category="input" required="true"  label="Environment" />
+        <property name="applicationName"  category="input" required="true"  label="Application Name" />
+        <property name="company"          category="input" required="true"  label="Company"  />
+        <property name="configAdminGroup" category="input" required="true"  label="Config Admin Group" />
+        <property name="version"          category="input" required="true"  label="Version" />
+        <property name="virtualMachine"   category="input" required="false" label="Virtual Machine" />
+        <property name="tomcat"           category="input" required="false" label="Tomcat" />
+        <property name="mysql"            category="input" required="false" label="MySql" />
+        <property name="cfSpace"          category="input" required="false" label="CF Space" />
+
+        <property name="sysId" category="output"/> 
     </type>
 
 
+<!--
+    #######################################################################################################################
+    #   ServiceNow Server Configuration 
+    #######################################################################################################################
+--> 
     <type type="servicenow.Server" extends="configuration.HttpConnection">
         <property name="changeRecordTableName" 
                   label="Change Record Table Name (Required for Generate Release)" 
@@ -169,4 +255,5 @@
                   required="true" 
                   default="change_task" />
     </type>
+
 </synthetic>
