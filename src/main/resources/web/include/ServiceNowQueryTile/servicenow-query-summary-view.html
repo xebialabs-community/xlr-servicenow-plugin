@@ -1,0 +1,42 @@
+<!--
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+
+-->
+
+<div data-ng-controller="serviceNow.ServiceNowQueryTileViewController as serviceNowQueryTile" class="service-now-query-tile dashboard-tile">
+
+    <div class="no-results" ng-if="serviceNowQueryTile.invalidTableName">
+        ServiceNow table name is incorrect
+    </div>
+    <div class="no-results" ng-if=" !serviceNowQueryTile.invalidTableName && serviceNowQueryTile.statesCounter === 0">
+        There are no ServiceNow issues found
+    </div>
+    <div ng-if="!serviceNowQueryTile.invalidTableName && !serviceNowQueryTile.loading && serviceNowQueryTile.statesCounter > 0">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="highcharts-tile" donut-chart data="serviceNowQueryTile.issuesSummaryData" options="serviceNowQueryTile.chartOptions"></div>
+            </div>
+            <div class="col-md-5 hidden-xs hidden-sm">
+                <ul class="legend">
+                    <li class="row" ng-repeat="value in serviceNowQueryTile.states | orderBy:'-counter'">
+                        <span class="col-sm-1"><span class="circle" ng-style="{'background-color': value.color}"></span></span>
+                        <span class="col-sm-1">{{value.counter}}</span>
+                        <span class="col-sm-6">{{value.state}}</span>
+                    </li>
+                    <li class="row" ng-if="serviceNowQueryTile.statesCounter > 5">
+                        <span class="col-sm-2"></span>
+                        <span class="col-sm-6">More...</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="serviceNowQueryTile.loading" class="spinner" style="text-align: center">
+        <img src="static/@project.version@/img/big-ajax-loader.gif" alt="Loading..."/>
+    </div>
+
+</div>

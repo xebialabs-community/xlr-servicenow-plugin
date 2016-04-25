@@ -31,7 +31,7 @@ This plugin (v3.x) requires XLR 4.8
 	This task will return the system ID of the change request as well as the change ticket ID.  These items can be used later in your release to interact with this ticket.		
 	 
 
-+ **Creaate Task** - This task will create a change task associated with a change request in ServiceNow.
++ **Create Task** - This task will create a change task associated with a change request in ServiceNow.
 
 	![image](images/CreateTask.png)
 	
