@@ -40,6 +40,7 @@ try:
     print snClient.print_record( change_request )
 except Exception, e:
     print e
+    print snClient.print_error( e )
     print "Error finding status for %s" % number
 # End try
 

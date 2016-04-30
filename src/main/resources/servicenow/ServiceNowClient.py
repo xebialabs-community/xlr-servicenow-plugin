@@ -85,6 +85,16 @@ class ServiceNowClient(object):
         # End if
     #End find_record
 
+    def print_error(self, response):
+        if type(response) is dict:
+           outStr =   "| Status  | %s |\n" % ( response["status"] )
+           outStr = "%s| Message | %s |\n" % ( outStr, response["error"]["message"] )
+           outStr = "%s| Detail  | %s |\n" % ( outStr, response["error"]["detail"] )
+           return outStr
+        # End if
+        return response
+    #End  print_error
+
     def print_table(self, headers, rows):
         print "\n|", "|".join(headers), "|"
         print "|", " ------ |" * len(headers)

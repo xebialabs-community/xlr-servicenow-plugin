@@ -37,6 +37,7 @@ except Exception, e:
     exc_info = sys.exc_info()
     traceback.print_exception( *exc_info )
     print e
+    print snClient.print_error( e )
     print "Failed to find record in Service Now"
     sys.exit(1)
 

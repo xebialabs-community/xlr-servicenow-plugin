@@ -190,15 +190,15 @@
     #######################################################################################################################
 --> 
     <type type="servicenow.CreateServiceRequest" extends="servicenow.CreateRecord">
-        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+        <property name="tableName" category="input" label="Table Name" default="sc_request" required="true" hidden="true" />
     </type>
 
     <type type="servicenow.UpdateServiceRequest" extends="servicenow.UpdateRecord">
-        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+        <property name="tableName" category="input" label="Table Name" default="sc_request" required="true" hidden="true" />
     </type>
 
     <type type="servicenow.FindServiceRequestItemByTicket" extends="servicenow.FindChangeRequestByTicket">
-        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true" hidden="true" />
+        <property name="tableName" category="input" label="Table Name" default="sc_request" required="true" hidden="true" />
     </type>
 
 <!--
