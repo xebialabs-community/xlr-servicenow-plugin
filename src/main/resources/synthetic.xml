@@ -21,6 +21,8 @@
         <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
         <property name="username" category="input" label="username" required="true" />
         <property name="password" password="true" category="input" required="true" />
+
+        <property name="data" category="output" kind="map_string_string"/>
     </type>
 
     <type type="servicenow.CreateRecord" extends="servicenow.Task">
@@ -120,6 +122,7 @@
 
         <property name="status" category="output"/>
         <property name="ticket" category="output"/>
+        <property name="data" category="output" kind="map_string_string"/>
     </type>
 
     <type type="servicenow.GetChangeRequest" extends="servicenow.Task">
@@ -239,6 +242,22 @@
         <property name="sysId" category="output"/> 
     </type>
 
+    <!--
+        #######################################################################################################################
+        #   ServiceNow Schedule Task
+        #######################################################################################################################
+    -->
+    <type type="servicenow.ScheduleTask" extends="xlrelease.PythonScript" >
+        <property name="iconLocation"   default="servicenow/servicenow.png" hidden="true" />
+        <property name="scriptLocation" default="servicenow/ScheduleTask.py" hidden="true" />
+
+        <property name="startField"  category="input" label="Start Date Field" required="true" />
+        <property name="targetPhase" category="input" label="Phase to start release window" required="true" />
+        <property name="targetTask"  category="input" label="Tasks to start release window" required="true" />
+        <property name="snFormat"    category="input" default="yyyy-MM-dd HH:mm:ss"  />
+        <property name="xlFormat"    category="input" default="yyyy-MM-dd'T'HH:mm:ss'Z'" />
+        <property name="snData"      category="input" label="Service Now Data Key-Value Map" kind="map_string_string" required="true" />
+    </type>
 
 <!--
     #######################################################################################################################

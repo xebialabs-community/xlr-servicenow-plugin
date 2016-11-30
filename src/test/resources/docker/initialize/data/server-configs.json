@@ -1,0 +1,10 @@
+[
+  {
+    "id": "Configuration/Custom/Configuration2139581",
+    "type":"servicenow.Server",
+    "title":"servicenow",
+    "url":"https://servicenowcd.service-now.com/",
+    "username":"joris",
+    "password":"joris",
+  }
+]
