@@ -3,3 +3,5 @@
 build
 xlr-servicenow-plugin.iml
 src/downloads/*
+*.ipr
+*.iws

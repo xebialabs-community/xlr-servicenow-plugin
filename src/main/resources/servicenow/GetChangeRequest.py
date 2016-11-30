@@ -4,7 +4,7 @@
 # FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
 #
 
-import sys, string, time
+import sys
 
 from servicenow.ServiceNowClientUtil import ServiceNowClientUtil
 
@@ -21,12 +21,11 @@ if fieldNames is None:
     sys.exit(1)
 
 servicenow_client = ServiceNowClientUtil.createServiceNowClient(servicenowServer, username, password)
-change_request = servicenow_client.get_change_request(tableName, number, fieldNames)
+change_request = servicenow_client.get_change_request_with_fields(tableName, number, fieldNames)
 
 rows = []
 row = []
 for field in fieldNames:
     row.append(change_request[field])
 rows.append(row)
-servicenow_client.print_table(fieldNames,rows)
-
+servicenow_client.print_table(fieldNames, rows)
