@@ -118,6 +118,11 @@ This plugin (v3.x) requires XLR 4.8
 ![image](images/FindRequestItemByTicket.png)
 
 
+### General Tasks ###
+
+* **Schedule Task** - Use data in a ServiceNow ticket to schedule a task to run at some time in the future.
+
+![image](images/ScheduleTask.png)
 
 
 #References#
