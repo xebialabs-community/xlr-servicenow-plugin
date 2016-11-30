@@ -24,7 +24,7 @@ try:
     print "Found %s in Service Now." % (sysId)
     print json.dumps(data, indent=4, sort_keys=True)
 except:
-    print json.dumps(data, indent=4, sort_keys=True)
+    print snClient.print_error( e )
     print "Error finding status for %s" % statusField
     sys.exit(1)
 # End try

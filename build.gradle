@@ -1,5 +1,15 @@
 plugins {
     id "com.github.hierynomus.license" version "0.11.0"
+    id "com.xebialabs.xlr.docker" version "1.1.12"
+}
+
+xlrDocker {
+    version = '5.0.1.10'
+    download("xlr_community_plugins") {
+        src(["https://github.com/xebialabs-community/xlr-xlrelease-plugin/releases/download/v1.7.2/xlr-xlrelease-plugin-1.7.2.jar"])
+        dest file("src/downloads/plugins/xlr-xlrelease-plugin-1.7.2.jar")
+        acceptAnyCertificate true
+    }
 }
 
 defaultTasks 'build'
@@ -14,4 +24,5 @@ version='4.1.2'
 license {
     header rootProject.file('src/main/license/xebialabs_community.license')
     strictCheck true
+    excludes(["**/*.json"])
 }

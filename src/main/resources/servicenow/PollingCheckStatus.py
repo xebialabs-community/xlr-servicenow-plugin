@@ -44,6 +44,7 @@ while ( not isClear ):
     exc_info = sys.exc_info()
     traceback.print_exception( *exc_info )
     print e
+    print snClient.print_error( e )
     print "Error finding status for %s" % statusField
   # End try
 

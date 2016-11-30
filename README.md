@@ -118,6 +118,18 @@ This plugin (v3.x) requires XLR 4.8
 ![image](images/FindRequestItemByTicket.png)
 
 
+### General Tasks ###
+
+* **Schedule Task** - Use data in a ServiceNow ticket to schedule a task to run at some time in the future.
+
+	* Start Date Field: Field in ServiceNow record to use for the start date of the target task
+	* Phase to start release window: The Release phase to look for the task that will start based on the ServiceNow start date
+	* Task to start release window: This is the task that will have its start data and time set based on the ServiceNow ticket start time
+	* Servicenow Date format: The date format to use to parse ServiceNow dates
+	* XL Release Date format: That date format to use to part XL Release dates
+	* ServiceNow key-value map: XL Release variable to keep information about an ServiceNow ticket.  This data should include the date and time that the release is scheduled to continue.
+
+![image](images/ScheduleTask.png)
 
 
 #References#
