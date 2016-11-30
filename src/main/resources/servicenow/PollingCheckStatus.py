@@ -38,8 +38,6 @@ while ( not isClear ):
          status = data[statusField]
          ticket = data["number"]
          print "Found %s in Service Now." % (sysId)
-         #snData[statusField] = status
-         #snData["number"] = ticket
          isClear = True
     # End if
   except Exception, e:

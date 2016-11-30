@@ -33,7 +33,6 @@ try:
     myTask = taskApi.getTask( taskID )
     myTask.waitForScheduledStartDate = True
     myTask.scheduledStartDate = xlrFormat.format(date)
-    myTask.title = "Scheduled Deploy"
     print "Schedule Task=> Task = %s" % ( myTask )
     print "Schedule Task=> Task.scheduledStartDate = %s" % ( myTask.scheduledStartDate )
     taskApi.updateTask( myTask )
