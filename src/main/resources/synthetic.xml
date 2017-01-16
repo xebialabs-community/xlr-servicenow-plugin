@@ -84,7 +84,18 @@
     #######################################################################################################################
 --> 
     <type type="servicenow.CreateChangeRequest" extends="servicenow.CreateRecord">
+
         <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
+        <property name="scriptLocation" default="servicenow/CreateChangeRequest.py" hidden="true" />
+
+        <property name="configurationItem" category="input" label="Configuration Item" required="false" />
+        <property name="assignmentGroup" category="input" label="Assignment Group" required="false" />
+        <property name="assignTo" category="input" label="Assigned To" required="false" />
+        <property name="implementationPlan" category="input" label="Implementation Plan" required="false" size="large" />
+        <property name="backoutPlan" category="input" label="Backout Plan" required="false" size="large" />
+        <property name="plannedStartDateTime" category="input" label="Planned Start Date/Time" description="yyyy-mm-dd HH:mm:ss" required="false" />
+        <property name="plannedEndDateTime" category="input" label="Planned End Date/Time" description="yyyy-mm-dd HH:mm:ss" required="false" />
+
     </type>
 
     <type type="servicenow.UpdateChangeRequest" extends="servicenow.UpdateRecord">
