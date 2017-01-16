@@ -38,7 +38,17 @@ content = """
 , "start_date"          : "%s"
 , "end_date"            : "%s"
 }
-""" % (shortDescription, comments, configurationItem, assignmentGroup, assignTo, implementationPlan, backoutPlan, plannedStartDateTime, plannedEndDateTime )
+""" % ( 
+  shortDescription
+, comments
+, configurationItem
+, assignmentGroup
+, assignTo
+, '' if implementationPlan is None else implementationPlan.replace('\n','\\n').replace('\r','\\r')
+, '' if backoutPlan        is None else backoutPlan.replace('\n','\\n').replace('\r','\\r')
+, plannedStartDateTime
+, plannedEndDateTime 
+)
 
 print "Sending content %s" % content
 
