@@ -19,7 +19,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-version='4.1.2'
+version='4.2.2'
 
 license {
     header rootProject.file('src/main/license/xebialabs_community.license')
