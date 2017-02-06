@@ -21,6 +21,10 @@ You can download an example template at the link as follows:
 
 This plugin (v3.x) requires XLR 4.8
 
+# Interfaces #
+
+The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
+
 ## Types ##
 
 ###Change Requests###
