@@ -12,6 +12,8 @@ if not username:
     username = servicenowServer["username"]
 if not password:
     password = servicenowServer["password"]
+if not authToken:
+    authToken = servicenowServer["authToken"]
 
 servicenowUrl = servicenowServer['url']
 

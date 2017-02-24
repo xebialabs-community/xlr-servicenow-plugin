@@ -20,7 +20,8 @@ if ticket is None:
     print "No Ticket provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+authToken = servicenowServer['authToken'] if authToken == None else authToken
+snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
 
 query = "number=%s" % ( ticket )
 

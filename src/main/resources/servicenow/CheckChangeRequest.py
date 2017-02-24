@@ -15,7 +15,9 @@ if number is None:
     print "No number provided.\n"
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+authToken = servicenowServer['authToken'] if authToken == None else authToken  
+
+snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
 change_request = snClient.get_change_request_with_fields(tableName, number, ['state'])
 status = change_request["approval"]
 print "Found %s in Service Now as %s" % (change_request['number'], status)

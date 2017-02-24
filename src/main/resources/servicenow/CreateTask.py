@@ -20,7 +20,8 @@ if content is None:
     print "No content provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+authToken = servicenowServer['authToken'] if authToken == None else authToken
+snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
 
 print "Sending content %s" % content
 

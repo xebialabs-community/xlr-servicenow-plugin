@@ -24,8 +24,10 @@ if pollInterval is None:
     print "No pollInterval provided."
     sys.exit(1)
 
+authToken = servicenowServer['authToken'] if authToken == None else authToken
+
 isClear = False
-snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
 data = ""
 
 while ( not isClear ):
