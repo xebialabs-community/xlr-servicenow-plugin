@@ -13,7 +13,6 @@ if servicenowServer is None:
     sys.exit(1)
 
 servicenowUrl = servicenowServer['url']
-authToken = servicenowServer['authToken'] if authToken == None else authToken
 
 credentials = CredentialsFallback(servicenowServer, username, password).getCredentials()
 content = """

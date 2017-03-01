@@ -12,7 +12,6 @@ if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
-authToken = servicenowServer['authToken'] if authToken == None else authToken
 
 snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
 content = None

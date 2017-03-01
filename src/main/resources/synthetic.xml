@@ -286,10 +286,23 @@
                   label="Change Task Table Name (Required for Generate Release)" 
                   required="true" 
                   default="change_task" />
-        <property name="authToken"
-                  label="Auth Token"
-                  description= "Authorization Token (optional if username and password is provided)"
-                  required="false"    />
+        <property name="useOAuth"
+                  label="Use OAuth"
+                  description= "Use OAuth instead of basic authentcation"
+                  required="false"    
+                  category="OAuth" 
+                  kind="boolean"/>   
+        <property name="clientId"
+                  label="Client Id"
+                  description= "Mandatory if OAuth is enabled"
+                  required="false"    
+                  category="OAuth"/>
+        <property name="clientSecret"
+                  label="Client Secret"
+                  description= "Mandatory if OAuth is enabled"
+                  required="false" 
+                  password="true"   
+                  category="OAuth"/>                                                   
     </type>
 
     <!-- ============ UI extensions: ============ -->

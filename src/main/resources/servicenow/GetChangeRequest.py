@@ -20,7 +20,6 @@ if fieldNames is None:
     print "No field names provided.\n"
     sys.exit(1)
 
-authToken = servicenowServer['authToken'] if authToken == None else authToken
 servicenow_client = ServiceNowClientUtil.createServiceNowClient(servicenowServer, username, password, authToken)
 change_request = servicenow_client.get_change_request_with_fields(tableName, number, fieldNames)
 

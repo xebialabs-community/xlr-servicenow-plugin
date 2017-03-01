@@ -28,7 +28,6 @@ if description is None:
     print "No description provided."
     sys.exit(1)
 
-authToken = servicenowServer['authToken'] if authToken == None else authToken
 snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
 contentJSON = content % (shortDescription, description)
 sysId = None

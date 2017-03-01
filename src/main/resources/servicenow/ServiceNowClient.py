@@ -5,20 +5,28 @@
 #
 
 import sys
+import urllib
 import com.xhaus.jyson.JysonCodec as json
 from xlrelease.HttpRequest import HttpRequest
 
-SN_RESULT_STATUS = 200
-RECORD_CREATED_STATUS = 201
-
+SN_RESULT_STATUS       = 200
+RECORD_CREATED_STATUS  = 201
 
 class ServiceNowClient(object):
-    def __init__(self, httpConnection, username=None, password=None, authToken=None):
+    def __init__(self, httpConnection, username=None, password=None, authToken=None): 
+        self.headers = {}
         self.httpConnection = httpConnection
-        self.httpRequest = HttpRequest(httpConnection, username, password)
-        self.headers={}
-        if authToken:
-           self.headers['Authorization']="Bearer %s" % (authToken)
+
+        if self.httpConnection['useOAuth']  == True:
+            if self.EmptyToNone(authToken) is None:
+               authUsername = self.httpConnection['username'] if self.EmptyToNone(username) == None else username
+               authPassword = self.httpConnection['password'] if self.EmptyToNone(password) == None else password
+               # Remove username and password so that it doesnt go for Basic Auth
+               self.httpConnection['username'] = ''
+               self.httpConnection['password'] = ''
+               authToken = self.get_oauth_token(self.httpConnection, authUsername, authPassword)
+            self.headers['Authorization'] = "Bearer %s" % (authToken)
+        self.httpRequest = HttpRequest(self.httpConnection, username, password)
 
     @staticmethod
     def create_client(httpConnection, username=None, password=None, authToken=None):
@@ -52,7 +60,7 @@ class ServiceNowClient(object):
     def create_record(self, table_name, content):
         servicenow_api_url = '/api/now/v1/table/%s' % (table_name)
         response = self.httpRequest.post(servicenow_api_url, body=content, contentType='application/json', headers = self.headers)
-
+       
         if response.getStatus() == RECORD_CREATED_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
@@ -132,3 +140,29 @@ class ServiceNowClient(object):
     def throw_error(self, response):
         print "Error from ServiceNow, HTTP Return: %s\n" % (response.getStatus())
         sys.exit(1)
+
+    def EmptyToNone(self,value):
+        if value is None:
+           return None
+        elif value.strip() == '':
+             return None
+        else:
+            return value
+
+    def get_oauth_token(self, httpConnection=None, username=None, password=None):
+        content                  = {}
+        content['grant_type']    = 'password'
+        content['client_id']     = httpConnection['clientId']
+        content['client_secret'] = httpConnection['clientSecret']
+        content['username']      = username
+        content['password']      = password
+        servicenow_oauth_url     = "/oauth_token.do"
+        httpRequest              = HttpRequest(httpConnection, None, None)
+        response                 = httpRequest.post(servicenow_oauth_url, body=urllib.urlencode(content), contentType='application/x-www-form-urlencoded')
+        if response.getStatus() == SN_RESULT_STATUS:
+            data = json.loads(response.getResponse())
+            return data['access_token']
+        else:
+            self.throw_error(response)
+
+
