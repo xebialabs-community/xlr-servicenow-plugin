@@ -8,6 +8,15 @@ import sys, string, time, traceback
 import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
+def GMTTime(datetime):
+    if datetime is not None and datetime.strip() != '' :
+        return time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime(time.mktime(time.strptime(datetime,"%Y-%m-%d %H:%M:%S"))))
+    else:
+        return ''
+
+def NoneToEmpty(text):
+    return '' if text is  None else text
+
 if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
@@ -41,13 +50,13 @@ content = """
 """ % ( 
   shortDescription
 , comments
-, configurationItem
-, assignmentGroup
-, assignTo
+, NoneToEmpty(configurationItem)
+, NoneToEmpty(assignmentGroup)
+, NoneToEmpty(assignTo)
 , '' if implementationPlan is None else implementationPlan.replace('\n','\\n').replace('\r','\\r')
 , '' if backoutPlan        is None else backoutPlan.replace('\n','\\n').replace('\r','\\r')
-, plannedStartDateTime
-, plannedEndDateTime 
+, GMTTime(plannedStartDateTime)
+, GMTTime(plannedEndDateTime)
 )
 
 print "Sending content %s" % content
