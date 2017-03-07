@@ -332,7 +332,7 @@
         <property name="cancelStatusId"
         label="Cancel Status Id" 
         default="7" 
-        description="Numeric value for the Cancelled status'/>        
+        description="Numeric value for the Cancelled status"/>        
    </type>
 
 </synthetic>
