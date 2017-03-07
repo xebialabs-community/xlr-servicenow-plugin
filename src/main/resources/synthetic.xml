@@ -320,4 +320,19 @@
         <property category="input" name="detailsViewColumns" hidden="true" kind="map_string_string" default="number:number,short_description,priority:priority,state:state,assigned_to:assigned_to.display_value" description="Map of columns displayed in details view of tile. For a referenced type column, display_value should be in the value of key:value pair separated by . (eg. assigned_to:assigned_to.display_value)"/>
     </type>
 
+    <type type="servicenow.ServiceNowReleaseAbortHook" extends="xlrelease.ExportHook">
+        <property name="servicenowServer"                    
+        label="Server"               
+        referenced-type="servicenow.Server" 
+        kind="ci" />
+        <property name="sysId"
+        label="SysID variable name" 
+        default="sysid" 
+        description="Name of the variable that hold sysid for the change request"/>
+        <property name="cancelStatusId"
+        label="Cancel Status Id" 
+        default="7" 
+        description="Numeric value for the Cancelled status'/>        
+   </type>
+
 </synthetic>
