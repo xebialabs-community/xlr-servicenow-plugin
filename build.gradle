@@ -4,7 +4,7 @@ plugins {
 }
 
 xlrDocker {
-    version = '5.0.1.10'
+    version = 'v6.1.0.1'
     download("xlr_community_plugins") {
         src(["https://github.com/xebialabs-community/xlr-xlrelease-plugin/releases/download/v1.7.2/xlr-xlrelease-plugin-1.7.2.jar"])
         dest file("src/downloads/plugins/xlr-xlrelease-plugin-1.7.2.jar")
