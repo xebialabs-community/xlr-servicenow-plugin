@@ -27,13 +27,14 @@ class ServiceNowClient(object):
                authToken = self.get_oauth_token(self.httpConnection, authUsername, authPassword)
             self.headers['Authorization'] = "Bearer %s" % (authToken)
         self.httpRequest = HttpRequest(self.httpConnection, username, password)
+        self.sysparms = 'sysparm_display_value=%s&sysparm_input_display_value=%s' % (self.httpConnection['sysparm_display_value'], self.httpConnection['sysparm_input_display_value'])
 
     @staticmethod
     def create_client(httpConnection, username=None, password=None, authToken=None):
         return ServiceNowClient(httpConnection, username, password, authToken)
 
     def get_change_request_states(self):
-        servicenow_api_url = '/api/now/v1/table/%s?element=state&name=task&sysparm_fields=%s' % ('sys_choice', 'value,label')
+        servicenow_api_url = '/api/now/v1/table/%s?element=state&name=task&sysparm_fields=%s&%s' % ('sys_choice', 'value,label', self.sysparms)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
@@ -41,7 +42,7 @@ class ServiceNowClient(object):
         self.throw_error(response)
 
     def get_change_request_with_fields(self, table_name, number, fields):
-        servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s' % (table_name, number, ",".join(fields))
+        servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s&%s' % (table_name, number, ",".join(fields), self.sysparms)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
@@ -50,7 +51,7 @@ class ServiceNowClient(object):
         self.throw_error(response)
 
     def get_change_request(self, table_name, sysId):
-        servicenow_api_url = '/api/now/v1/table/%s/%s' % (table_name, sysId)
+        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sysId, self.sysparms)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
@@ -58,7 +59,7 @@ class ServiceNowClient(object):
         self.throw_error(response)
 
     def create_record(self, table_name, content):
-        servicenow_api_url = '/api/now/v1/table/%s' % (table_name)
+        servicenow_api_url = '/api/now/v1/table/%s?%s' % (table_name, self.sysparms)
         response = self.httpRequest.post(servicenow_api_url, body=content, contentType='application/json', headers = self.headers)
        
         if response.getStatus() == RECORD_CREATED_STATUS:
@@ -71,7 +72,7 @@ class ServiceNowClient(object):
     # End create_record
 
     def update_record(self, table_name, sysId, content):
-        servicenow_api_url = '/api/now/v1/table/%s/%s' % (table_name, sysId)
+        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sysId, self.sysparms)
         response = self.httpRequest.put(servicenow_api_url, body=content, contentType='application/json', headers = self.headers)
 
         if response.getStatus() == SN_RESULT_STATUS:
@@ -84,7 +85,7 @@ class ServiceNowClient(object):
     # End create_record
 
     def find_record(self, table_name, query):
-        servicenow_api_url = '/api/now/v1/table/%s?%s' % (table_name, query)
+        servicenow_api_url = '/api/now/v1/table/%s?%s&%s' % (table_name, query, self.sysparms)
         print "Servic Now URL = %s " % (servicenow_api_url)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
 

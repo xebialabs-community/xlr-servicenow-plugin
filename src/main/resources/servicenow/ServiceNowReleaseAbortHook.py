@@ -16,9 +16,9 @@ def getVariableByName(variables, variableName):
 # End def 
 
 
-def cancelChangeRequest(servicenowServer, sysId, cancelStatusId):
+def cancelChangeRequest(servicenowServer, sysId, cancelStatus):
     snClient = ServiceNowClient.create_client(servicenowServer, None, None, None)
-    tableName = servicenowServer.changeRecordTableName
+    tableName = servicenowServer['changeRecordTableName']
     content = '{"state": "%s" }' % (cancelStatusId)
 
     logger.info ("Sending content %s" % content)
@@ -41,11 +41,14 @@ if exportHook.servicenowServer is None:
     sys.exit(1)
 else :
     servicenowServer = {
-                        'url':exportHook.servicenowServer.url, 'username':exportHook.servicenowServer.username, 
-                       'password':exportHook.servicenowServer.password,'useOAuth':exportHook.servicenowServer.useOAuth 
-                       ,'clientId':exportHook.servicenowServer.clientId, 'clientSecret':exportHook.servicenowServer.clientSecret
-                       ,'proxyHost': exportHook.servicenowServer.proxyHost, 'proxyPort':exportHook.servicenowServer.proxyPort
-                       , 'changeRecordTableName': exportHook.servicenowServer.changeRecordTableName, 'changeTaskTableName': exportHook.servicenowServer.changeTaskTableName 
+                        'url':exportHook.servicenowServer.url, 'username':exportHook.servicenowServer.username 
+                       , 'password':exportHook.servicenowServer.password,'useOAuth':exportHook.servicenowServer.useOAuth 
+                       , 'clientId':exportHook.servicenowServer.clientId, 'clientSecret':exportHook.servicenowServer.clientSecret
+                       , 'proxyHost': exportHook.servicenowServer.proxyHost, 'proxyPort':exportHook.servicenowServer.proxyPort
+                       , 'changeRecordTableName': exportHook.servicenowServer.changeRecordTableName
+                       , 'changeTaskTableName': exportHook.servicenowServer.changeTaskTableName
+                       , 'sysparm_display_value' : exportHook.servicenowServer.sysparm_display_value
+                       , 'sysparm_input_display_value' : exportHook.servicenowServer.sysparm_input_display_value  
                        }
 if release.status != 'ABORTED' :
    print "Release status is %s, ignoring Abort Hook" % (release.status)

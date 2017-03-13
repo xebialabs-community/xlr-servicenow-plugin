@@ -286,6 +286,18 @@
                   label="Change Task Table Name (Required for Generate Release)" 
                   required="true" 
                   default="change_task" />
+        <property name="sysparm_display_value" 
+                  label="Retrieve display value"
+                  required="true" 
+                  default="True"
+                  kind="boolean" 
+                  description="If true returns display values for all of the fields" />
+        <property name="sysparm_input_display_value" 
+                  label="Input values are display values"
+                  required="true" 
+                  default="True"
+                  kind="boolean" 
+                  description="If true treats input values as display values" />
         <property name="useOAuth"
                   label="Use OAuth"
                   description= "Use OAuth instead of basic authentcation"
@@ -328,11 +340,11 @@
         <property name="sysId"
         label="SysID variable name" 
         default="sysid" 
-        description="Name of the variable that hold sysid for the change request"/>
-        <property name="cancelStatusId"
-        label="Cancel Status Id" 
-        default="7" 
-        description="Numeric value for the Cancelled status"/>        
+        description="Name of the variable in release that holds sysid for the change request"/>
+        <property name="cancelStatus"
+        label="Cancel Status" 
+        default="Cancelled" 
+        description="Cancelled status or numeric value if display values are not used as input"/>        
    </type>
 
 </synthetic>

@@ -8,12 +8,6 @@ import sys, string, time, traceback
 import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
-def GMTTime(datetime):
-    if datetime is not None and datetime.strip() != '' :
-        return time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime(time.mktime(time.strptime(datetime,"%Y-%m-%d %H:%M:%S"))))
-    else:
-        return ''
-
 def NoneToEmpty(text):
     return '' if text is  None else text
 
@@ -55,8 +49,8 @@ content = """
 , NoneToEmpty(assignTo)
 , '' if implementationPlan is None else implementationPlan.replace('\n','\\n').replace('\r','\\r')
 , '' if backoutPlan        is None else backoutPlan.replace('\n','\\n').replace('\r','\\r')
-, GMTTime(plannedStartDateTime)
-, GMTTime(plannedEndDateTime)
+, plannedStartDateTime
+, plannedEndDateTime
 )
 
 print "Sending content %s" % content
