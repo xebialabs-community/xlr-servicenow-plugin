@@ -19,10 +19,10 @@
         <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
 
         <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
-        <property name="username" category="input" label="username" required="true" />
-        <property name="password" password="true" category="input" required="true" />
+        <property name="username" category="input" label="username" required="false" />
+        <property name="password" password="true" category="input" required="false" />
 
-        <property name="authToken" category="input" label="Auth Token" required="false" description="Overrides the auth token used to connect to the server" />
+        <!-- <property name="authToken" category="input" label="Auth Token" required="false" description="Overrides the auth token used to connect to the server" /> -->
 
         <property name="data" category="output" kind="map_string_string"/>
     </type>
@@ -90,14 +90,6 @@
         <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
         <property name="scriptLocation" default="servicenow/CreateChangeRequest.py" hidden="true" />
 
-        <property name="configurationItem" category="input" label="Configuration Item" required="false" />
-        <property name="assignmentGroup" category="input" label="Assignment Group" required="false" />
-        <property name="assignTo" category="input" label="Assigned To" required="false" />
-        <property name="implementationPlan" category="input" label="Implementation Plan" required="false" size="large" />
-        <property name="backoutPlan" category="input" label="Backout Plan" required="false" size="large" />
-        <property name="plannedStartDateTime" category="input" label="Planned Start Date/Time" description="yyyy-mm-dd HH:mm:ss" required="false" />
-        <property name="plannedEndDateTime" category="input" label="Planned End Date/Time" description="yyyy-mm-dd HH:mm:ss" required="false" />
-
     </type>
 
     <type type="servicenow.UpdateChangeRequest" extends="servicenow.UpdateRecord">
@@ -127,7 +119,7 @@
     <type type="servicenow.PollingCheckStatus" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/PollingCheckStatus.py" hidden="true" />
 
-        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="false" />
         <property name="sysId" category="input" label="System ID" required="true" />
         <property name="pollInterval" category="input" kind="integer" label="Polling Interval" required="true" default="30" />
         <property name="statusField" category="input" label="Status Field" required="true" default="state" />
@@ -299,11 +291,22 @@
                   kind="boolean" 
                   description="If true treats input values as display values" />
         <property name="useOAuth"
-                  label="Use OAuth"
+                  label="Use ServiceNow OAuth Resource Server"
                   description= "Use OAuth instead of basic authentcation"
                   required="false"    
                   category="OAuth" 
-                  kind="boolean"/>   
+                  kind="boolean"/>
+        <property name="oauthUsername"
+                  label="Username"
+                  description= "Mandatory if OAuth is enabled"
+                  required="false"
+                  category="OAuth"/>
+        <property name="oauthPassword"
+                  label="Password"
+                  description= "Mandatory if OAuth is enabled"
+                  required="false"
+                  password="true"
+                  category="OAuth"/>   
         <property name="clientId"
                   label="Client Id"
                   description= "Mandatory if OAuth is enabled"
@@ -331,20 +334,5 @@
         <property category="input" name="query" required="false" size="large" description="ServiceNow query"/>
         <property category="input" name="detailsViewColumns" hidden="true" kind="map_string_string" default="number:number,short_description,priority:priority,state:state,assigned_to:assigned_to.display_value" description="Map of columns displayed in details view of tile. For a referenced type column, display_value should be in the value of key:value pair separated by . (eg. assigned_to:assigned_to.display_value)"/>
     </type>
-
-    <type type="servicenow.ServiceNowReleaseAbortHook" extends="xlrelease.ExportHook">
-        <property name="servicenowServer"                    
-        label="Server"               
-        referenced-type="servicenow.Server" 
-        kind="ci" />
-        <property name="sysId"
-        label="SysID variable name" 
-        default="sysid" 
-        description="Name of the variable in release that holds sysid for the change request"/>
-        <property name="cancelStatus"
-        label="Cancel Status" 
-        default="Cancelled" 
-        description="Cancelled status or numeric value if display values are not used as input"/>        
-   </type>
 
 </synthetic>

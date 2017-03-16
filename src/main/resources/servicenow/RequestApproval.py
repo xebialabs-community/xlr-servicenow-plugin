@@ -28,7 +28,7 @@ if description is None:
     print "No description provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 contentJSON = content % (shortDescription, description)
 sysId = None
 
@@ -77,3 +77,6 @@ while ( not isClear ):
   # End try
 
 # End While
+
+if snClient is not None:
+        snClient.close()

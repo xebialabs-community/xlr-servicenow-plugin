@@ -24,7 +24,7 @@ if content is None:
     print "No content provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 
 print "Sending content %s" % content
@@ -40,5 +40,8 @@ except Exception, e:
     print snClient.print_error( e )
     print "Failed to create record in Service Now"
     sys.exit(1)
+finally :
+    if snClient is not None:
+        snClient.close()
 
 

@@ -26,7 +26,7 @@ if pollInterval is None:
 
 
 isClear = False
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 data = ""
 
 while ( not isClear ):
@@ -51,5 +51,10 @@ while ( not isClear ):
 
   time.sleep( pollInterval )
 # End While
+
 print "\n"
 print snClient.print_record( data )
+
+if snClient is not None:
+   snClient.close()
+

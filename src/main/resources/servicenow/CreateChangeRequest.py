@@ -8,9 +8,6 @@ import sys, string, time, traceback
 import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
-def NoneToEmpty(text):
-    return '' if text is  None else text
-
 if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
@@ -27,30 +24,16 @@ if comments is None:
     print "No comments provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 content = """
 {
   "short_description"   : "%s"
 , "comments"            : "%s"
-, "cmdb_ci"             : "%s"
-, "assignment_group"    : "%s"
-, "assigned_to"         : "%s"
-, "change_plan"         : "%s"
-, "backout_plan"        : "%s"
-, "start_date"          : "%s"
-, "end_date"            : "%s"
 }
 """ % ( 
   shortDescription
 , comments
-, NoneToEmpty(configurationItem)
-, NoneToEmpty(assignmentGroup)
-, NoneToEmpty(assignTo)
-, '' if implementationPlan is None else implementationPlan.replace('\n','\\n').replace('\r','\\r')
-, '' if backoutPlan        is None else backoutPlan.replace('\n','\\n').replace('\r','\\r')
-, plannedStartDateTime
-, plannedEndDateTime
 )
 
 print "Sending content %s" % content
@@ -70,5 +53,8 @@ except Exception, e:
     print snClient.print_error( e )
     print "Failed to create record in Service Now"
     sys.exit(1)
+finally :
+    if snClient is not None:
+        snClient.close()
 
 

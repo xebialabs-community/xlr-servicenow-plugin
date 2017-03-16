@@ -20,7 +20,7 @@ if fieldNames is None:
     print "No field names provided.\n"
     sys.exit(1)
 
-servicenow_client = ServiceNowClientUtil.createServiceNowClient(servicenowServer, username, password, authToken)
+servicenow_client = ServiceNowClientUtil.createServiceNowClient(servicenowServer, username, password)
 change_request = servicenow_client.get_change_request_with_fields(tableName, number, fieldNames)
 
 rows = []
@@ -29,3 +29,5 @@ for field in fieldNames:
     row.append(change_request[field])
 rows.append(row)
 servicenow_client.print_table(fieldNames, rows)
+
+servicenow_client.close()

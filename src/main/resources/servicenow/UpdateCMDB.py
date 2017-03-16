@@ -12,7 +12,7 @@ if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 content = """
 {"used_for":"%s","name":"%s","company":"%s","u_config_admin_group":"%s","version":"%s","u_vm":"%s","u_tomcat":"%s","u_mysql":"%s","u_space":"%s"}
@@ -29,3 +29,6 @@ except Exception, e:
     print e
     print "Failed to create record in Service Now"
     sys.exit(1)
+finally :
+    if snClient is not None:
+        snClient.close()

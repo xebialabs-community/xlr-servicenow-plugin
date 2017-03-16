@@ -24,7 +24,7 @@ if comments is None:
     print "No comments provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password,authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 content = """
 {"short_description":"%s","comments":"%s"}
@@ -47,5 +47,8 @@ except Exception, e:
     print snClient.print_error( e )
     print "Failed to create record in Service Now"
     sys.exit(1)
+finally :
+    if snClient is not None:
+        snClient.close()    
 
 

@@ -20,7 +20,7 @@ if ticket is None:
     print "No Ticket provided."
     sys.exit(1)
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 query = "number=%s" % ( ticket )
 
@@ -40,5 +40,8 @@ except Exception, e:
     print snClient.print_error( e )
     print "Failed to find record in Service Now"
     sys.exit(1)
+finally :
+    if snClient is not None:
+        snClient.close()
 
 

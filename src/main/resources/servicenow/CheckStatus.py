@@ -13,7 +13,7 @@ if servicenowServer is None:
     sys.exit(1)
 
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 content = None
 
 print "Sending content %s" % content
@@ -28,4 +28,7 @@ except:
     print snClient.print_error( e )
     print "Error finding status for %s" % statusField
     sys.exit(1)
+finally :
+    if snClient is not None:
+        snClient.close()
 # End try
