@@ -48,6 +48,7 @@ class ServiceNowClient(object):
     def get_scorecards(self):
         servicenow_api_url = '/api/now/v1/pa/scorecards'
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        self.revoke_token()
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
