@@ -86,10 +86,7 @@
     #######################################################################################################################
 --> 
     <type type="servicenow.CreateChangeRequest" extends="servicenow.CreateRecord">
-
         <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
-        <property name="scriptLocation" default="servicenow/CreateChangeRequest.py" hidden="true" />
-
     </type>
 
     <type type="servicenow.UpdateChangeRequest" extends="servicenow.UpdateRecord">
