@@ -44,6 +44,14 @@ class ServiceNowClient(object):
             data = json.loads(response.getResponse())
             return data['result']
         self.throw_error(response)
+       
+    def get_scorecards(self):
+        servicenow_api_url = '/api/now/v1/pa/scorecards'
+        response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        if response.getStatus() == SN_RESULT_STATUS:
+            data = json.loads(response.getResponse())
+            return data['result']
+        self.throw_error(response)
 
     def get_change_request_with_fields(self, table_name, number, fields):
         servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s&%s' % (table_name, number, ",".join(fields), self.sysparms)
