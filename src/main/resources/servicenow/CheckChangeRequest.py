@@ -33,5 +33,6 @@ else:
     print "Change Request %s is NOT in required state\n" % (number)
     sys.exit(1)
 
+
 print "\n"
 print snClient.print_record(change_request)

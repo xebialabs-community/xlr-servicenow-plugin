@@ -5,25 +5,41 @@
 #
 
 import sys
+import urllib
 import com.xhaus.jyson.JysonCodec as json
 from xlrelease.HttpRequest import HttpRequest
 
-SN_RESULT_STATUS = 200
-RECORD_CREATED_STATUS = 201
-
+SN_RESULT_STATUS       = 200
+RECORD_CREATED_STATUS  = 201
 
 class ServiceNowClient(object):
-    def __init__(self, httpConnection, username=None, password=None):
+    def __init__(self, httpConnection, username=None, password=None): 
+        self.headers        = {}
+        self.accessToken    = None
+        self.refreshToken   = None
         self.httpConnection = httpConnection
-        self.httpRequest = HttpRequest(httpConnection, username, password)
+
+        if username is not None:
+           self.httpConnection['username'] = username
+        if password is not None:
+           self.httpConnection['password'] = password
+
+        if httpConnection['useOAuth']  == True:
+           tokenData = self.create_token(httpConnection)
+           self.set_token_header(tokenData)
+
+        self.httpRequest = HttpRequest(self.httpConnection, username, password)
+        self.sysparms = 'sysparm_display_value=%s&sysparm_input_display_value=%s' % (self.httpConnection['sysparmDisplayValue'], self.httpConnection['sysparmInputDisplayValue'])
 
     @staticmethod
     def create_client(httpConnection, username=None, password=None):
         return ServiceNowClient(httpConnection, username, password)
 
     def get_change_request_states(self):
-        servicenow_api_url = '/api/now/v1/table/%s?element=state&name=task&sysparm_fields=%s' % ('sys_choice', 'value,label')
-        response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        servicenow_api_url = '/api/now/v1/table/%s?element=state&name=task&sysparm_fields=%s&%s' % ('sys_choice', 'value,label', self.sysparms)
+        response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
+        self.revoke_token()
+        
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
@@ -32,14 +48,17 @@ class ServiceNowClient(object):
     def get_scorecards(self):
         servicenow_api_url = '/api/now/v1/pa/scorecards'
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        self.revoke_token()
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
         self.throw_error(response)
 
     def get_change_request_with_fields(self, table_name, number, fields):
-        servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s' % (table_name, number, ",".join(fields))
-        response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        servicenow_api_url = '/api/now/v1/table/%s?number=%s&sysparm_fields=%s&%s' % (table_name, number, ",".join(fields), self.sysparms)
+        response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
+        self.revoke_token()
+
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
             if len(data['result']) == 1:
@@ -47,43 +66,48 @@ class ServiceNowClient(object):
         self.throw_error(response)
 
     def get_change_request(self, table_name, sysId):
-        servicenow_api_url = '/api/now/v1/table/%s/%s' % (table_name, sysId)
-        response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sysId, self.sysparms)
+        response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
+        self.revoke_token()
+
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
         self.throw_error(response)
 
     def create_record(self, table_name, content):
-        servicenow_api_url = '/api/now/v1/table/%s' % (table_name)
-        response = self.httpRequest.post(servicenow_api_url, body=content, contentType='application/json')
+        servicenow_api_url = '/api/now/v1/table/%s?%s' % (table_name, self.sysparms)
+        response = self.httpRequest.post(servicenow_api_url, body=content, contentType='application/json', headers = self.headers)
+        self.revoke_token()
 
         if response.getStatus() == RECORD_CREATED_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
         else:
             self.throw_error(response)
-            # End if
+        # End if
 
     # End create_record
 
     def update_record(self, table_name, sysId, content):
-        servicenow_api_url = '/api/now/v1/table/%s/%s' % (table_name, sysId)
-        response = self.httpRequest.put(servicenow_api_url, body=content, contentType='application/json')
+        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sysId, self.sysparms)
+        response = self.httpRequest.put(servicenow_api_url, body=content, contentType='application/json', headers = self.headers)
+        self.revoke_token()
 
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
             return data['result']
         else:
             self.throw_error(response)
-            # End if
+        # End if
 
     # End create_record
 
     def find_record(self, table_name, query):
-        servicenow_api_url = '/api/now/v1/table/%s?%s' % (table_name, query)
+        servicenow_api_url = '/api/now/v1/table/%s?%s&%s' % (table_name, query, self.sysparms)
         print "Servic Now URL = %s " % (servicenow_api_url)
-        response = self.httpRequest.get(servicenow_api_url, contentType='application/json')
+        response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
+        self.revoke_token()
 
         if response.getStatus() == SN_RESULT_STATUS:
             data = json.loads(response.getResponse())
@@ -136,4 +160,57 @@ class ServiceNowClient(object):
 
     def throw_error(self, response):
         print "Error from ServiceNow, HTTP Return: %s\n" % (response.getStatus())
+        self.revoke_token()
         sys.exit(1)
+
+    def EmptyToNone(self,value):
+        if value is None:
+           return None
+        elif value.strip() == '':
+             return None
+        else:
+            return value
+
+    def create_token(self, httpConnection):
+        servicenow_oauth_url     = "/oauth_token.do"
+        content                  = {}
+        content['grant_type']    = 'password'
+        content['client_id']     = httpConnection['clientId']
+        content['client_secret'] = httpConnection['clientSecret']
+        content['username']      = httpConnection['oauthUsername']
+        content['password']      = httpConnection['oauthPassword']
+        httpRequest              = HttpRequest(httpConnection, None, None)
+        response                 = httpRequest.post(servicenow_oauth_url, body=urllib.urlencode(content), contentType='application/x-www-form-urlencoded')
+        if response.getStatus() == SN_RESULT_STATUS:
+            data = json.loads(response.getResponse())
+            return data
+        print 'Could not get access token'
+        self.throw_error(response)
+
+    def refresh_token(self, httpConnection, refreshToken):
+        servicenowUrl = "/oauth_token.do"
+        content                  = {}
+        content['grant_type']    = 'refresh_token'
+        content['client_id']     = httpConnection['clientId']
+        content['client_secret'] = httpConnection['clientSecret']
+        content['refresh_token'] = refreshToken
+        httpRequest = HttpRequest(httpConnection, None, None)
+        response = httpRequest.post(servicenowUrl, body=urllib.urlencode(content), contentType='application/x-www-form-urlencoded')
+        if response.getStatus() == SN_RESULT_STATUS:
+            data = json.loads(response.getResponse())
+            return data
+        print "Unable to refresh token using %s" % refreshToken
+        self.throw_error(response)        
+
+    def set_token_header(self, tokenData):
+        self.accessToken  = tokenData['access_token']
+        self.refreshToken = tokenData['refresh_token']
+        self.headers['Authorization'] = "Bearer %s" % (self.accessToken)
+
+    def revoke_token(self):
+        if self.httpConnection['useOAuth'] == True :
+           httpRequest = HttpRequest(self.httpConnection, None, None)
+           servicenowApiUrl = "/oauth_revoke_token.do?token=%s" % self.accessToken
+           response = httpRequest.get(servicenowApiUrl)
+           servicenowApiUrl = "/oauth_revoke_token.do?token=%s" % self.refreshToken
+           response = httpRequest.get(servicenowApiUrl)

@@ -12,6 +12,7 @@ if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
+
 snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 content = None
 
