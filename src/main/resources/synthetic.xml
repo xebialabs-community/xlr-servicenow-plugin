@@ -278,13 +278,13 @@
                   label="Change Task Table Name (Required for Generate Release)" 
                   required="true" 
                   default="change_task" />
-        <property name="sysparm_display_value" 
+        <property name="sysparmDisplayValue" 
                   label="Retrieve display value"
                   required="true" 
                   default="True"
                   kind="boolean" 
                   description="If true returns display values for all of the fields" />
-        <property name="sysparm_input_display_value" 
+        <property name="sysparmInputDisplayValue" 
                   label="Input values are display values"
                   required="true" 
                   default="True"
@@ -329,7 +329,7 @@
         <property category="input" name="servicenowServer" referenced-type="servicenow.Server" kind="ci" label="Server" description="ServiceNow server id to connect to"/>
         <property category="input" name="username" required="false" description="Overrides the username used to connect to the server"/>
         <property category="input" name="password" password="true" required="false" description="Overrides the password used to connect to the server"/>
-        <property category="input" name="authToken" required="false" description="Overrides the auth token used to connect to the server" />
+        <property category="input" name="authToken" required="false" description="Overrides the auth token used to connect to the server" default="None" hidden="true"/>
         <property category="input" name="tableName" required="true" default="incident" description="ServiceNow table name (in lower case) (for example problem, change_request etc) Default value: incident"/>
         <property category="input" name="query" required="false" size="large" description="ServiceNow query"/>
         <property category="input" name="detailsViewColumns" hidden="true" kind="map_string_string" default="number:number,short_description,priority:priority,state:state,assigned_to:assigned_to.display_value" description="Map of columns displayed in details view of tile. For a referenced type column, display_value should be in the value of key:value pair separated by . (eg. assigned_to:assigned_to.display_value)"/>

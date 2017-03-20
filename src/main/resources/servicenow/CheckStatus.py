@@ -28,7 +28,4 @@ except:
     print snClient.print_error( e )
     print "Error finding status for %s" % statusField
     sys.exit(1)
-finally :
-    if snClient is not None:
-        snClient.close()
 # End try

@@ -11,7 +11,7 @@ from servicenow.ServiceNowClient import ServiceNowClient
 if not servicenowServer:
     raise Exception("ServiceNow server ID must be provided")
 
-snClient = ServiceNowClient.create_client(servicenowServer, username, password, authToken)
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 servicenowUrl = servicenowServer['url'].rstrip("/")
 
 content = None

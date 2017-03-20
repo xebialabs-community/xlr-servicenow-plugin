@@ -40,8 +40,5 @@ except Exception, e:
     print snClient.print_error( e )
     print "Failed to find record in Service Now"
     sys.exit(1)
-finally :
-    if snClient is not None:
-        snClient.close()
 
 

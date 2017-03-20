@@ -77,6 +77,3 @@ while ( not isClear ):
   # End try
 
 # End While
-
-if snClient is not None:
-        snClient.close()

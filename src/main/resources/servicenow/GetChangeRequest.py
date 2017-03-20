@@ -30,4 +30,3 @@ for field in fieldNames:
 rows.append(row)
 servicenow_client.print_table(fieldNames, rows)
 
-servicenow_client.close()

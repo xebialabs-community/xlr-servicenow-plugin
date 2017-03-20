@@ -55,6 +55,4 @@ while ( not isClear ):
 print "\n"
 print snClient.print_record( data )
 
-if snClient is not None:
-   snClient.close()
 
