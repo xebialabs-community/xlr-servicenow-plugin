@@ -257,6 +257,7 @@
         <property name="targetPhase" category="input" label="Phase to start release window" required="true" />
         <property name="targetTask"  category="input" label="Task to start release window" required="true" />
         <property name="snFormat"    category="input" label="ServiceNow date format" default="yyyy-MM-dd HH:mm:ss"  />
+        <property name="snTimeZone"  category="input" label="ServiceNow TimeZone" default="GMT"  required="true" />
         <property name="xlFormat"    category="input" label="XLR date format" default="yyyy-MM-dd'T'HH:mm:ss'Z'" />
         <property name="snData"      category="input" label="Service Now Data Key-Value Map" kind="map_string_string" required="true" />
     </type>

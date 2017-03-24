@@ -8,10 +8,11 @@ from java.util import Date
 from java.text import ParseException
 from java.text import SimpleDateFormat
 from sets import Set
-
+from java.util import TimeZone
 
 formatter = SimpleDateFormat( snFormat )
 xlrFormat = SimpleDateFormat( xlFormat )
+formatter.setTimeZone(TimeZone.getTimeZone(snTimeZone))
 
 startDate = snData[startField]
 print "------"
