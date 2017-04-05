@@ -29,7 +29,7 @@ def get_row_data(item):
     row_map['link'] = servicenowUrl + "/nav_to.do?uri=%s.do?sys_id=%s" % (tableName, item['sys_id'])
     return row_map
 
-results = snClient.find_record(tableName, "sysparm_display_value=true&sysparm_limit=1000&sysparam_query=%s"% (urllib.quote_plus(query)) )
+results = snClient.find_record(tableName, "sysparm_display_value=true&sysparm_limit=1000&sysparam_query=%s"% (query) )
 rows= {}
 for item in results:
     row = item['number']
