@@ -29,3 +29,4 @@ for field in fieldNames:
     row.append(change_request[field])
 rows.append(row)
 servicenow_client.print_table(fieldNames, rows)
+
