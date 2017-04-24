@@ -16,7 +16,7 @@
     #######################################################################################################################
 -->
     <type type="servicenow.Task" extends="xlrelease.PythonScript" virtual="true">
-        <property name="iconLocation" default="servicenow/servicenow.png" hidden="true" />
+        <property name="iconLocation" default="servicenow/servicenow-icon.png" hidden="true" />
 
         <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server" kind="ci"/>
         <property name="username" category="input" label="username" required="false" />
@@ -250,7 +250,7 @@
         #######################################################################################################################
     -->
     <type type="servicenow.ScheduleTask" extends="xlrelease.PythonScript" >
-        <property name="iconLocation"   default="servicenow/servicenow.png" hidden="true" />
+        <property name="iconLocation"   default="servicenow/servicenow-icon.png" hidden="true" />
         <property name="scriptLocation" default="servicenow/ScheduleTask.py" hidden="true" />
 
         <property name="startField"  category="input" label="Start Date Field" required="true" />
