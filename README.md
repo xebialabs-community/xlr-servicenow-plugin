@@ -14,7 +14,7 @@
 [xlr-servicenow-plugin-code-climate-url]: https://codeclimate.com/github/xebialabs-community/xlr-servicenow-plugin
 [xlr-servicenow-plugin-license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
 [xlr-servicenow-plugin-license-url]: https://opensource.org/licenses/MIT
-[xlr-servicenow-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-servicenowd-plugin/total.svg
+[xlr-servicenow-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-servicenow-plugin/total.svg
 
 # Preface #
 
