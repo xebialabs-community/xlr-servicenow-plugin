@@ -1,6 +1,8 @@
 # Build status #
 
-[![Build Status](https://travis-ci.org/xebialabs-community/xlr-servicenow-plugin.svg?branch=master)](https://travis-ci.org/xebialabs-community/xlr-servicenow-plugin)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b4b6dbd57edb4344b4e32dfc76025422)](https://www.codacy.com/app/zvercodebender/xlr-servicenow-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xebialabs-community/xlr-servicenow-plugin&amp;utm_campaign=Badge_Grade)[![Code Climate](https://codeclimate.com/github/xebialabs-community/xlr-servicenow-plugin/badges/gpa.svg)](https://codeclimate.com/github/xebialabs-community/xlr-servicenow-plugin)
+[![Build Status](https://travis-ci.org/xebialabs-community/xlr-servicenow-plugin.svg?branch=master)](https://travis-ci.org/xebialabs-community/xlr-servicenow-plugin)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b4b6dbd57edb4344b4e32dfc76025422)](https://www.codacy.com/app/zvercodebender/xlr-servicenow-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xebialabs-community/xlr-servicenow-plugin&amp;utm_campaign=Badge_Grade)
+[![Code Climate](https://codeclimate.com/github/xebialabs-community/xlr-servicenow-plugin/badges/gpa.svg)](https://codeclimate.com/github/xebialabs-community/xlr-servicenow-plugin)
 
 # Preface #
 
@@ -27,7 +29,7 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 
 ## Types ##
 
-###Change Requests###
+### Change Requests ###
 
 + **Create Change Request** - This task will create a change request in ServiceNow.
 
@@ -136,6 +138,6 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 ![image](images/ScheduleTask.png)
 
 
-#References#
+# References #
 1. [Service Now REST API Wiki](http://wiki.servicenow.com/index.php?title=Table_API#gsc.tab=0)
 
