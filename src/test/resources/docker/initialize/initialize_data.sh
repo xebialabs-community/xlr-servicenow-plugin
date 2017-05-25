@@ -9,23 +9,21 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-BASEDIR=$(dirname $0)
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
 
-####################### XLR server data
-
-    curl -u admin:admin \
-        -H "Accept: application/json" \
-        -H "Content-type: application/json" \
-        -X POST \
-        -d @$BASEDIR/data/server-configs.json \
-    http://localhost:5516/repository/cis
-
-    curl -u admin:admin \
-        -H "Accept: application/json" \
-        -H "Content-type: application/json" \
-        -X POST \
-        -d @$BASEDIR/data/ServiceNow_Example.json\
-    http://localhost:5516/api/v1/templates/import
+####################### ServiceNow server data
 
 
-exit 0
+wget --http-user=admin --http-password=admin --auth-no-challenge \
+     --header="Accept: application/json" \
+     --header="Content-type: application/json" \
+     --post-file=$SCRIPTPATH/data/server-configs.json \
+    http://localhost:5516/repository/cis -O /dev/null
+
+wget --http-user=admin --http-password=admin --auth-no-challenge \
+     --header="Accept: application/json" \
+     --header="Content-type: application/json" \
+     --post-file=$SCRIPTPATH/data/ServiceNow_Example.json \
+     http://localhost:5516/api/v1/templates/import -O /dev/null

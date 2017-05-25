@@ -68,9 +68,9 @@ class ServiceNowClient(object):
                 return data['result'][0]
         self.throw_error(response)
 
-    def get_change_request(self, table_name, sysId):
+    def get_change_request(self, table_name, sys_id):
         if self.useOAuth :self.issue_token()
-        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sysId, self.sysparms)
+        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sys_id, self.sysparms)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if self.useOAuth :self.revoke_token()
 

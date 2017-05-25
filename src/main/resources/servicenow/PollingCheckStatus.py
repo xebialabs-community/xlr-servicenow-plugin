@@ -29,32 +29,25 @@ if pollInterval is None:
     print "No pollInterval provided."
     sys.exit(1)
 
-isClear = False
-snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+sn_client = ServiceNowClient.create_client(servicenowServer, username, password)
 data = ""
 
-while (not isClear):
-
+while True:
     try:
-        data = snClient.get_change_request(tableName, sysId)
-
+        data = sn_client.get_change_request(tableName, sysId)
         status = data[statusField]
+        print "Found [%s] in Service Now with status: [%s]\n" % (sysId, status)
         if status == checkForStatus:
             status = data[statusField]
             ticket = data["number"]
-            print "Found %s in Service Now." % (sysId)
-            isClear = True
-            # End if
+            break
     except Exception, e:
         exc_info = sys.exc_info()
         traceback.print_exception(*exc_info)
         print e
-        print snClient.print_error(e)
+        print sn_client.print_error(e)
         print "Error finding status for %s" % statusField
-    # End try
-
     time.sleep(pollInterval)
-# End While
 
 print "\n"
-print snClient.print_record(data)
+print sn_client.print_record(data)
