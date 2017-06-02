@@ -107,7 +107,7 @@ class ServiceNowClient(object):
     def find_record(self, table_name, query):
         if self.useOAuth :self.issue_token()
         servicenow_api_url = '/api/now/v1/table/%s?%s&%s' % (table_name, query, self.sysparms)
-        print "Servic Now URL = %s " % (servicenow_api_url)
+        print "Service Now URL = %s " % (servicenow_api_url)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if self.useOAuth :self.revoke_token()
 
@@ -162,6 +162,7 @@ class ServiceNowClient(object):
 
     def throw_error(self, response):
         print "Error from ServiceNow, HTTP Return: %s\n" % (response.getStatus())
+        print "Detailed error: %s\n" % response.response
         if self.useOAuth :self.revoke_token()
         sys.exit(1)
 
