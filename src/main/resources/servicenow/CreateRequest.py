@@ -50,6 +50,6 @@ except Exception, e:
     print e
     print snClient.print_error( e )
     print "Failed to create record in Service Now"
-    sys.exit(1)  
+    sys.exit(1)
 
 

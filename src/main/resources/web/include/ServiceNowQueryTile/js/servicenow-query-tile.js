@@ -49,7 +49,7 @@
         }
 
         function tileConfigurationIsPopulated() {
-            var config = tile.configurationProperties;
+            var config = tile.properties;
             return !_.isEmpty(config.servicenowServer);
         }
 

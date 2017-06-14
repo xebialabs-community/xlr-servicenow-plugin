@@ -9,7 +9,7 @@
 #
 
 
-import sys, string, time
+import sys, time
 import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
