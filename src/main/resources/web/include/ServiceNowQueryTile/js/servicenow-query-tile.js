@@ -49,7 +49,14 @@
         }
 
         function tileConfigurationIsPopulated() {
-            var config = tile.properties;
+            var config;
+            // old style pre 7.0
+            if (tile.properties == null) {
+                config = tile.configurationProperties;
+            } else {
+                // new style since 7.0
+                config = tile.properties;
+            }
             return !_.isEmpty(config.servicenowServer);
         }
 
