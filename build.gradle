@@ -8,7 +8,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-version = '4.1.9'
+version = '4.1.10'
 
 xlDocker {
   compileImage = 'xebialabs/xlr_dev_compile'
