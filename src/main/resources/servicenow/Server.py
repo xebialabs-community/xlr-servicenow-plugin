@@ -8,25 +8,23 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import sys, string, time
-import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
-params ={
-	'url':configuration.url, 'username':configuration.username 
-	, 'password':configuration.password,'useOAuth':configuration.useOAuth
-        , 'oauthUsername':configuration.oauthUsername, 'oauthPassword':configuration.oauthPassword 
-	, 'clientId':configuration.clientId, 'clientSecret':configuration.clientSecret
-	, 'proxyHost': configuration.proxyHost, 'proxyPort':configuration.proxyPort
-	, 'changeRecordTableName': configuration.changeRecordTableName
-	, 'changeTaskTableName': configuration.changeTaskTableName
-	, 'sysparmDisplayValue' : configuration.sysparmDisplayValue
-	, 'sysparmInputDisplayValue' : configuration.sysparmInputDisplayValue  
-} 
+params = {
+    'url': configuration.url, 'username': configuration.username
+    , 'password': configuration.password, 'useOAuth': configuration.useOAuth
+    , 'oauthUsername': configuration.oauthUsername, 'oauthPassword': configuration.oauthPassword
+    , 'clientId': configuration.clientId, 'clientSecret': configuration.clientSecret
+    , 'proxyHost': configuration.proxyHost, 'proxyPort': configuration.proxyPort
+    , 'changeRecordTableName': configuration.changeRecordTableName
+    , 'changeTaskTableName': configuration.changeTaskTableName
+    , 'sysparmDisplayValue': configuration.sysparmDisplayValue
+    , 'sysparmInputDisplayValue': configuration.sysparmInputDisplayValue
+}
 
-snClient = ServiceNowClient.create_client(params)
+sn_client = ServiceNowClient.create_client(params)
 content = None
 
 print "Sending content %s" % content
 
-data = snClient.get_scorecards()
+data = sn_client.get_change_request_states()
