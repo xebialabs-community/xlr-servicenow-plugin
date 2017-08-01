@@ -18,21 +18,21 @@ SN_RESULT_STATUS       = 200
 RECORD_CREATED_STATUS  = 201
 
 class ServiceNowClient(object):
-    def __init__(self, httpConnection, username=None, password=None): 
+    def __init__(self, httpConnection, username, password): 
         self.headers        = {}
         self.accessToken    = None
         self.refreshToken   = None
         self.httpConnection = httpConnection
         self.useOAuth = httpConnection['useOAuth']
-        if username is not None:
+        if username:
            self.httpConnection['username'] = username
-        if password is not None:
+        if password:
            self.httpConnection['password'] = password
         self.httpRequest = HttpRequest(self.httpConnection, username, password)
         self.sysparms = 'sysparm_display_value=%s&sysparm_input_display_value=%s' % (self.httpConnection['sysparmDisplayValue'], self.httpConnection['sysparmInputDisplayValue'])
 
     @staticmethod
-    def create_client(httpConnection, username=None, password=None):
+    def create_client(httpConnection, username, password):
         return ServiceNowClient(httpConnection, username, password)
 
     def get_change_request_states(self):
