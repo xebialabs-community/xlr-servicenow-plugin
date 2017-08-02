@@ -26,7 +26,7 @@
 
         <property name="servicenowServer" category="input" label="Server" referenced-type="servicenow.Server"
                   kind="ci"/>
-        <property name="username" category="input" label="username" required="false"/>
+        <property name="username" category="input" required="false"/>
         <property name="password" password="true" category="input" required="false"/>
 
         <!-- <property name="authToken" category="input" label="Auth Token" required="false" description="Overrides the auth token used to connect to the server" /> -->
