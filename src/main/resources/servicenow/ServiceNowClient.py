@@ -1,8 +1,13 @@
 #
-# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
-# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+# Copyright 2017 XEBIALABS
 #
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+
 
 import sys
 import urllib
@@ -19,9 +24,9 @@ class ServiceNowClient(object):
         self.refreshToken   = None
         self.httpConnection = httpConnection
         self.useOAuth = httpConnection['useOAuth']
-        if username is not None:
+        if username:
            self.httpConnection['username'] = username
-        if password is not None:
+        if password:
            self.httpConnection['password'] = password
         self.httpRequest = HttpRequest(self.httpConnection, username, password)
         self.sysparms = 'sysparm_display_value=%s&sysparm_input_display_value=%s' % (self.httpConnection['sysparmDisplayValue'], self.httpConnection['sysparmInputDisplayValue'])
@@ -63,9 +68,9 @@ class ServiceNowClient(object):
                 return data['result'][0]
         self.throw_error(response)
 
-    def get_change_request(self, table_name, sysId):
+    def get_change_request(self, table_name, sys_id):
         if self.useOAuth :self.issue_token()
-        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sysId, self.sysparms)
+        servicenow_api_url = '/api/now/v1/table/%s/%s?%s' % (table_name, sys_id, self.sysparms)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if self.useOAuth :self.revoke_token()
 
@@ -107,7 +112,7 @@ class ServiceNowClient(object):
     def find_record(self, table_name, query):
         if self.useOAuth :self.issue_token()
         servicenow_api_url = '/api/now/v1/table/%s?%s&%s' % (table_name, query, self.sysparms)
-        print "Servic Now URL = %s " % (servicenow_api_url)
+        print "Service Now URL = %s " % (servicenow_api_url)
         response = self.httpRequest.get(servicenow_api_url, contentType='application/json', headers = self.headers)
         if self.useOAuth :self.revoke_token()
 
@@ -162,6 +167,7 @@ class ServiceNowClient(object):
 
     def throw_error(self, response):
         print "Error from ServiceNow, HTTP Return: %s\n" % (response.getStatus())
+        print "Detailed error: %s\n" % response.response
         if self.useOAuth :self.revoke_token()
         sys.exit(1)
 

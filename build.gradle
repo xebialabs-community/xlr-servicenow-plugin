@@ -1,28 +1,27 @@
 plugins {
-    id "com.github.hierynomus.license" version "0.11.0"
-    id "com.xebialabs.xlr.docker" version "1.1.12"
+  id "com.github.hierynomus.license" version "0.14.0"
+  id "com.xebialabs.xl.docker" version "1.1.0"
 }
-
-xlrDocker {
-    version = 'v6.1.0.1'
-    download("xlr_community_plugins") {
-        src(["https://github.com/xebialabs-community/xlr-xlrelease-plugin/releases/download/v1.7.2/xlr-xlrelease-plugin-1.7.2.jar"])
-        dest file("src/downloads/plugins/xlr-xlrelease-plugin-1.7.2.jar")
-        acceptAnyCertificate true
-    }
-}
-
-defaultTasks 'build'
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-version='4.1.7'
+version = '4.1.11'
+
+xlDocker {
+  compileImage = 'xebialabs/xlr_dev_compile'
+  compileVersion = 'v7.0.0.1'
+  runImage = 'xebialabs/xlr_dev_run'
+  runVersion = 'v7.0.0.1'
+  runPortMapping = '15516:5516'
+}
 
 license {
-    header rootProject.file('src/main/license/xebialabs_community.license')
-    strictCheck true
-    excludes(["**/*.json"])
+  header rootProject.file('License.md')
+  strictCheck false
+  ext.year = Calendar.getInstance().get(Calendar.YEAR)
+  ext.name = 'XEBIALABS'
 }
+
