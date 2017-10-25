@@ -8,46 +8,37 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import sys
-import time
-import traceback
+
+import sys, string, time, traceback
+import com.xhaus.jyson.JysonCodec as json
 from servicenow.ServiceNowClient import ServiceNowClient
 
 if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
-if sysId is None:
-    print "No sysId provided."
-    sys.exit(1)
-
 if tableName is None:
     print "No tableName provided."
     sys.exit(1)
 
-if pollInterval is None:
-    print "No pollInterval provided."
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
+
+print "Sending content %s" % content
+
+try:
+    data = snClient.create_record( tableName, content )
+    sysId = data["sys_id"]
+    Ticket = data["number"]
+    print "Created %s in Service Now." % (sysId)
+    print "Created %s in Service Now." % (Ticket)
+    print "\n"
+    print snClient.print_record( data )
+except Exception, e:
+    exc_info = sys.exc_info()
+    traceback.print_exception( *exc_info )
+    print e
+    print snClient.print_error( e )
+    print "Failed to create record in Service Now"
     sys.exit(1)
 
-sn_client = ServiceNowClient.create_client(servicenowServer, username, password)
-data = ""
 
-while True:
-    try:
-        data = sn_client.get_change_request(tableName, sysId)
-        status = data[statusField]
-        print "Found [%s] in Service Now with status: [%s] Looking for %s\n" % (data['number'], status, checkForStatus)
-        if status == checkForStatus:
-            status = data[statusField]
-            ticket = data["number"]
-            break
-    except Exception, e:
-        exc_info = sys.exc_info()
-        traceback.print_exception(*exc_info)
-        print e
-        print sn_client.print_error(e)
-        print "Error finding status for %s" % statusField
-    time.sleep(pollInterval)
-
-print "\n"
-print sn_client.print_record(data)

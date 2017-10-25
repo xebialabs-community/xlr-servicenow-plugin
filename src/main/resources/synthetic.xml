@@ -46,6 +46,17 @@
         <property name="Ticket" category="output"/>
     </type>
 
+    <type type="servicenow.CreateNewRecord" extends="servicenow.Task">
+        <property name="scriptLocation" default="servicenow/CreateNewRecord.py" hidden="true"/>
+
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true"
+                  hidden="true"/>
+        <property name="content" category="input" label="Request Content" required="true" size="large"/>
+        <property name="sysId"   category="output"/>
+        <property name="Ticket"  category="output"/>
+
+    </type>
+
     <type type="servicenow.UpdateRecord" extends="servicenow.Task">
         <property name="scriptLocation" default="servicenow/UpdateRecord.py" hidden="true"/>
 
@@ -97,6 +108,11 @@
         #######################################################################################################################
     -->
     <type type="servicenow.CreateChangeRequest" extends="servicenow.CreateRecord">
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true"
+                  hidden="true"/>
+    </type>
+
+    <type type="servicenow.CreateNewChangeRequest" extends="servicenow.CreateNewRecord">
         <property name="tableName" category="input" label="Table Name" default="change_request" required="true"
                   hidden="true"/>
     </type>
@@ -206,6 +222,11 @@
                   hidden="true"/>
     </type>
 
+    <type type="servicenow.CreateNewIncident" extends="servicenow.CreateNewRecord">
+        <property name="tableName" category="input" label="Table Name" default="incident" required="true"
+                  hidden="true"/>
+    </type>
+
     <type type="servicenow.UpdateIncident" extends="servicenow.UpdateRecord">
         <property name="tableName" category="input" label="Table Name" default="incident" required="true"
                   hidden="true"/>
@@ -226,6 +247,11 @@
                   hidden="true"/>
     </type>
 
+    <type type="servicenow.CreateNewServiceRequest" extends="servicenow.CreateNewRecord">
+        <property name="tableName" category="input" label="Table Name" default="sc_request" required="true"
+                  hidden="true"/>
+    </type>
+
     <type type="servicenow.UpdateServiceRequest" extends="servicenow.UpdateRecord">
         <property name="tableName" category="input" label="Table Name" default="sc_request" required="true"
                   hidden="true"/>
@@ -242,6 +268,11 @@
         #######################################################################################################################
     -->
     <type type="servicenow.CreateRequestItem" extends="servicenow.CreateRecord">
+        <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true"
+                  hidden="true"/>
+    </type>
+
+    <type type="servicenow.CreateNewRequestItem" extends="servicenow.CreateNewRecord">
         <property name="tableName" category="input" label="Table Name" default="sc_req_item" required="true"
                   hidden="true"/>
     </type>
