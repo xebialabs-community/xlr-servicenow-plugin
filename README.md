@@ -39,6 +39,7 @@ This plugin (v3.x) requires XLR 4.8
 
 The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 
+
 ## Types ##
 
 ### Change Requests ###
@@ -148,6 +149,32 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 	* ServiceNow key-value map: XL Release variable to keep information about an ServiceNow ticket.  This data should include the date and time that the release is scheduled to continue.
 
 ![image](images/ScheduleTask.png)
+
+## Tiles ##
+
+The service now tile allows you to query records from service now tables and summarize them according to their State
+
+### Configuration ###
+
+To obtain a data-set from service now a query is used to filter the result sets (no query will bring back all the rows from a specified table truncated by default to 1000 rows)
+
+To create a filter the easiest method is to navigate to the table in ServiceNow (e.g. change_requests) and filter it based on your search criteria as shown below.
+
+![image](images/snowFilteredTable.png)
+
+When you are satisfied with the data you can copy the query by right-clicking the breadcrumbs and selecting Copy Query
+
+![image](images/snowCopyQuery.png) 
+
+In **XL Release** you can add a new Dashboard Tile (see our documentation for details) called **ServiceNow tickets**.  Configure this tile and within the query field you should paste in the filter query copied from ServiceNow.
+
+![image](images/tileConfigureQuery.png) 
+
+For this example saving the configuration will yield the following summary and detail views
+
+![image](images/tileDashboardSummary.png) 
+
+![image](images/tileDashboardDetail.png) 
 
 
 # References #
