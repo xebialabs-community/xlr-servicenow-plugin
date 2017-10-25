@@ -11,7 +11,7 @@
 
 import sys, time
 import com.xhaus.jyson.JysonCodec as json
-from servicenow.ServiceNowClient import ServiceNowClient
+#from servicenow.ServiceNowClient import ServiceNowClient
 
 if servicenowServer is None:
     print "No server provided."

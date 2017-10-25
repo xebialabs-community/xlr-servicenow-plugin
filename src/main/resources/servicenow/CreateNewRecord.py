@@ -9,8 +9,7 @@
 #
 
 
-import sys, string, time, traceback
-import com.xhaus.jyson.JysonCodec as json
+import sys, time, traceback
 from servicenow.ServiceNowClient import ServiceNowClient
 
 if servicenowServer is None:
