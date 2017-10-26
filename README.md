@@ -48,6 +48,12 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 
 	![image](images/CreateChangeRequest.png)
 	
+	This task will return the system ID of the change request as well as the change ticket ID.  These items can be used later in your release to interact with this ticket.
+	
++ **Create New Change Request** - This task will create a change request in ServiceNow.
+
+	![image](images/CreateNewChangeRequest.png)
+	
 	This task will return the system ID of the change request as well as the change ticket ID.  These items can be used later in your release to interact with this ticket.		
 	 
 + **Update Record** - This task can be used to make changes to change requests.
@@ -96,6 +102,10 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 
 	![image](images/CreateIncident.png)
 
++ **Create New Incident** - This task will create a new incident.
+
+	![image](images/CreateNewIncident.png)
+
 + **Update Incident** - This task will update an existing incident
 
 	![image](images/UpdateIncident.png)
@@ -109,6 +119,10 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 + **Create Service Request Item** - This task will create a service request.  
 
 ![image](images/CreateServiceRequest.png)
+
++ **Create New Service Request Item** - This task will create a service request.  
+
+![image](images/CreateNewServiceRequest.png)
 
 
 + **Update Service Request Item** - Update an existing service request item
@@ -124,8 +138,11 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 ### Service Request Items ###
 	
 + **Create Service Request Item** - This task will create a service request item.  It expects that there is already a service request opened that this item can be attached to.	
-
 ![image](images/CreateRequestItem.png)
+
++ **Create New Service Request Item** - This task will create a service request item.  It expects that there is already a service request opened that this item can be attached to.	
+![image](images/CreateNewRequestItem.png)
+
 
 + **Update Service Request Item** - Update an existing service request item
 

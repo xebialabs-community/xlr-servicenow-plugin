@@ -65,7 +65,7 @@ while ( not isClear ):
 
     status = data["approval"]
     print "Found %s in Service Now as %s" % (data['number'], status)
-    if "approved" == status:
+    if "Approved" == status:
         approval = False
         isClear = True
         print "ServiceNow approval received."

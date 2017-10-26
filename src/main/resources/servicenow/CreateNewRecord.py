@@ -9,34 +9,35 @@
 #
 
 
-import sys, time
-import com.xhaus.jyson.JysonCodec as json
-#from servicenow.ServiceNowClient import ServiceNowClient
+import sys, time, traceback
+from servicenow.ServiceNowClient import ServiceNowClient
 
 if servicenowServer is None:
     print "No server provided."
     sys.exit(1)
 
-servicenowUrl = servicenowServer['url']
+if tableName is None:
+    print "No tableName provided."
+    sys.exit(1)
 
-credentials = CredentialsFallback(servicenowServer, username, password).getCredentials()
-content = """
-{"short_description":"%s","comments":"%s"}
-""" % (shortDescription, comments)
-
+snClient = ServiceNowClient.create_client(servicenowServer, username, password)
 
 print "Sending content %s" % content
 
-servicenowAPIUrl = servicenowUrl + '/api/now/v1/table/' + tableName
-
-servicenowResponse = XLRequest(servicenowAPIUrl, 'POST', content, credentials['username'], credentials['password'], 'application/json').send()
-
-if servicenowResponse.status == RECORD_CREATED_STATUS:
-    data = json.loads(servicenowResponse.read())
-    sysId = data["result"]["sys_id"]
+try:
+    data = snClient.create_record( tableName, content )
+    sysId = data["sys_id"]
+    Ticket = data["number"]
     print "Created %s in Service Now." % (sysId)
-else:
+    print "Created %s in Service Now." % (Ticket)
+    print "\n"
+    print snClient.print_record( data )
+except Exception, e:
+    exc_info = sys.exc_info()
+    traceback.print_exception( *exc_info )
+    print e
+    print snClient.print_error( e )
     print "Failed to create record in Service Now"
-    servicenowResponse.errorDump()
     sys.exit(1)
+
 

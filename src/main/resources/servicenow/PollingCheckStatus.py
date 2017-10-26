@@ -36,7 +36,7 @@ while True:
     try:
         data = sn_client.get_change_request(tableName, sysId)
         status = data[statusField]
-        print "Found [%s] in Service Now with status: [%s]\n" % (sysId, status)
+        print "Found [%s] in Service Now with status: [%s] Looking for %s\n" % (data['number'], status, checkForStatus)
         if status == checkForStatus:
             status = data[statusField]
             ticket = data["number"]
