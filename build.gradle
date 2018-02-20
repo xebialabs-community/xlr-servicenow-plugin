@@ -1,5 +1,3 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-
 plugins {
   id "com.github.hierynomus.license" version "0.14.0"
   id "com.xebialabs.xl.docker" version "1.1.0"
@@ -11,13 +9,11 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-//version = '4.1.11'
-
 xlDocker {
   compileImage = 'xebialabs/xlr_dev_compile'
-  compileVersion = 'v7.0.0.1'
+  compileVersion = 'v7.2.0.2'
   runImage = 'xebialabs/xlr_dev_run'
-  runVersion = 'v7.0.0.1'
+  runVersion = 'v7.2.0.1'
   runPortMapping = '15516:5516'
 }
 
@@ -27,13 +23,6 @@ if (!project.hasProperty('release.scope')) {
 
 if (!project.hasProperty('release.useLastTag')) {
   project.ext['release.useLastTag'] = true
-}
-
-processResources.configure {
-  filter ReplaceTokens, tokens: [
-    'project.version': version.toString(),
-    'project.name'   : rootProject.name
-  ]
 }
 
 license {
