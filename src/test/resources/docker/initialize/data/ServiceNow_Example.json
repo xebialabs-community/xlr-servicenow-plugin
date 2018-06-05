@@ -107,7 +107,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-14T11:25:46.221-0400",
                      "customScriptTask": "Applications/Release5377584/Phase6058846/Task1954868",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "shortDescription": "${short_description}",
                      "comments": "${comment}"
                   }
@@ -142,7 +142,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-13T10:26:07.509-0400",
                      "customScriptTask": "Applications/Release5377584/Phase6058846/Task246679",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "content": {
                         "change_request": "${sysId}",
                         "short_description": "Deploy all INSTALL VERSIONS for the IDM components",
@@ -220,7 +220,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-02T18:13:47.752-0400",
                      "customScriptTask": "Applications/Release5377584/Phase6058846/Task6351046",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "sysId": "${sysId}",
                      "pollInterval": 30,
                      "statusField": "state",
@@ -269,7 +269,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-13T10:31:26.552-0400",
                      "customScriptTask": "Applications/Release5377584/Phase9444625/Task9874955",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "sysId": "${taskId}",
                      "content": {
                         "state": "3",
@@ -326,7 +326,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-14T11:26:29.562-0400",
                      "customScriptTask": "Applications/Release5377584/Phase9444625/Task7266356",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "sysId": "${sysId}",
                      "content": {
                         "state": "3",
@@ -423,7 +423,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-03T16:33:25.329-0400",
                      "customScriptTask": "Applications/Release5377584/Phase6780302/Task7845254",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "shortDescription": "${short_description}",
                      "description": "${comment}"
                   }
@@ -455,7 +455,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-14T11:23:16.831-0400",
                      "customScriptTask": "Applications/Release5377584/Phase6780302/Task2488915",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "sysId": "${sysId2}",
                      "content": {
                         "state": "3",
@@ -539,7 +539,7 @@
                      "$lastModifiedBy": "admin",
                      "$lastModifiedAt": "2016-04-03T16:36:37.401-0400",
                      "customScriptTask": "Applications/Release5377584/Phase3228524/Task5463956",
-                     "servicenowServer": "Configuration/Custom/Configuration2139581",
+                     "servicenowServer": "Configuration/Custom/snow",
                      "environment": "TEST",
                      "applicationName": "MyApplication",
                      "company": "XebiaLabs",

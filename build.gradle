@@ -11,9 +11,9 @@ apply plugin: 'maven'
 
 xlDocker {
   compileImage = 'xebialabs/xlr_dev_compile'
-  compileVersion = 'v7.2.0.2'
+  compileVersion = 'v8.0.0.1'
   runImage = 'xebialabs/xlr_dev_run'
-  runVersion = 'v7.2.0.1'
+  runVersion = 'v8.0.0.2'
   runPortMapping = '15516:5516'
 }
 
@@ -27,7 +27,7 @@ if (!project.hasProperty('release.useLastTag')) {
 
 license {
   header rootProject.file('License.md')
-  strictCheck false
+  strictCheck true
   ext.year = Calendar.getInstance().get(Calendar.YEAR)
   ext.name = 'XEBIALABS'
 }
