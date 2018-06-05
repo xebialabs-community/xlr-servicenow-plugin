@@ -331,7 +331,7 @@
         #   ServiceNow Server Configuration
         #######################################################################################################################
     -->
-    <type type="servicenow.Server" extends="configuration.HttpConnection">
+    <type type="servicenow.Server" label="ServiceNow: Server" extends="configuration.HttpConnection">
         <property name="changeRecordTableName"
                   label="Change Record Table Name (Required for Generate Release)"
                   required="true"
