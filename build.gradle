@@ -37,7 +37,7 @@ dependencies {
   testCompile "com.xebialabs.gradle.plugins:xl-test-api:0.0.3"
 }
 
-test {
+task itest(type: Test) {
     useTestNG() {
         //set TestNG output dir
         outputDirectory = file("$project.buildDir//testngOutput")

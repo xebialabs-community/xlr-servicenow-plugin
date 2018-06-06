@@ -22,7 +22,7 @@ script:
   -p 5516:5516 --name xlr xebialabs/xl-docker-demo-xlr:latest
 - sleep 60
 - docker logs xlr
-- "./gradlew test"
+- "./gradlew itest"
 - docker stop xlr
 notifications:
   slack:

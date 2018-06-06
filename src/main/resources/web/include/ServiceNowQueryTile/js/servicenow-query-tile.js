@@ -142,7 +142,7 @@
         }
 
         function createGridOptions(serviceNowData) {
-            var filterHeaderTemplate = "<div data-ng-include=\"'partials/releases/grid/templates/name-filter-template.html'\"></div>";
+            var filterHeaderTemplate = `<div data-ng-include="partials/releases/grid/templates/name-filter-template.html"></div>`;
             var columnDefs = [
                     {
                         displayName: "Number",
