@@ -73,7 +73,7 @@ The ServiceNow plugin integrates with the SNOW REST API v1 (i.e. `/api/now/v1/`)
 	
 	The current status and ticket number are returned once the requred value has been set.
 
-### Change Tasks###
+### Change Tasks ###
 
 + **Create Change Task** - This task will create a change task associated with a change request in ServiceNow.
 
