@@ -14,7 +14,7 @@
     var ServiceNowQueryTileViewController = function ($scope, ServiceNowQueryService, XlrTileHelper) {
         var vm = this;
         var tile;
-
+        var config;
         var predefinedColors = [];
         predefinedColors['New'] = '#7E827A';
         predefinedColors['Active'] = '#4AA0C8';
@@ -48,7 +48,6 @@
         }
 
         function tileConfigurationIsPopulated() {
-            var config;
             // old style pre 7.0
             if (tile.properties == null) {
                 config = tile.configurationProperties;
@@ -142,49 +141,22 @@
         }
 
         function createGridOptions(serviceNowData) {
-            var filterHeaderTemplate = "<div data-ng-include=\"'partials/releases/grid/templates/name-filter-template.html'\"></div>";
+            var filterHeaderTemplate = `<div data-ng-include="partials/releases/grid/templates/name-filter-template.html"></div>`;
             var columnDefs = [
                     {
                         displayName: "Number",
                         field: "number",
                         cellTemplate: "static/@project.version@/include/ServiceNowQueryTile/grid/number-cell-template.html",
                         filterHeaderTemplate: filterHeaderTemplate,
-                        enableColumnMenu: false,
+                        enableColumnMenu: true,
                         width: '18%'
-                    },
-                    {
-                        displayName: "Short description",
-                        field: "short_description",
-                        cellTemplate: "static/@project.version@/include/ServiceNowQueryTile/grid/short-description-cell-template.html",
-                        filterHeaderTemplate: filterHeaderTemplate,
-                        enableColumnMenu: false,
-                        width: '25%'
-                    },
-                    {
-                        displayName: "Priority",
-                        field: "priority",
-                        cellTemplate: "static/@project.version@/include/ServiceNowQueryTile/grid/priority-cell-template.html",
-                        filterHeaderTemplate: filterHeaderTemplate,
-                        enableColumnMenu: false,
-                        width: '18%'
-                    },
-                    {
-                        displayName: "State",
-                        field: "state",
-                        cellTemplate: "static/@project.version@/include/ServiceNowQueryTile/grid/state-cell-template.html",
-                        filterHeaderTemplate: filterHeaderTemplate,
-                        enableColumnMenu: false,
-                        width: '19%'
-                    },
-                    {
-                        displayName: "Assigned To",
-                        field: "assigned_to",
-                        cellTemplate: "static/@project.version@/include/ServiceNowQueryTile/grid/assigned-to-cell-template.html",
-                        filterHeaderTemplate: filterHeaderTemplate,
-                        enableColumnMenu: false,
-                        width: '20%'
                     }
                 ];
+            for (var key in config.detailsViewColumns['value']) {
+                if (key != "number") {
+                    columnDefs.push({displayName: key, field: key, filterHeaderTemplate: filterHeaderTemplate, enableColumnMenu: true})
+                }
+            };
             return XlrTileHelper.getGridOptions(serviceNowData, columnDefs);
         }
 

@@ -331,7 +331,7 @@
         #   ServiceNow Server Configuration
         #######################################################################################################################
     -->
-    <type type="servicenow.Server" extends="configuration.HttpConnection">
+    <type type="servicenow.Server" label="ServiceNow: Server" extends="configuration.HttpConnection">
         <property name="changeRecordTableName"
                   label="Change Record Table Name (Required for Generate Release)"
                   required="true"
@@ -403,8 +403,8 @@
         <property category="input" name="tableName" required="true" default="incident"
                   description="ServiceNow table name (in lower case) (for example problem, change_request etc) Default value: incident"/>
         <property category="input" name="query" required="false" size="large" description="ServiceNow query"/>
-        <property category="input" name="detailsViewColumns" hidden="true" kind="map_string_string"
-                  default="number:number,short_description,priority:priority,state:state,assigned_to:assigned_to.display_value"
+        <property category="input" name="detailsViewColumns" hidden="false" kind="map_string_string"
+                  default="number:number,short_description:short_description,priority:priority,state:state,assigned_to:assigned_to.display_value"
                   description="Map of columns displayed in details view of tile. For a referenced type column, display_value should be in the value of key:value pair separated by . (eg. assigned_to:assigned_to.display_value)"/>
     </type>
 

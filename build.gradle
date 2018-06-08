@@ -11,9 +11,9 @@ apply plugin: 'maven'
 
 xlDocker {
   compileImage = 'xebialabs/xlr_dev_compile'
-  compileVersion = 'v7.2.0.2'
+  compileVersion = 'v8.0.0.1'
   runImage = 'xebialabs/xlr_dev_run'
-  runVersion = 'v7.2.0.1'
+  runVersion = 'v8.0.0.2'
   runPortMapping = '15516:5516'
 }
 
@@ -25,9 +25,30 @@ if (!project.hasProperty('release.useLastTag')) {
   project.ext['release.useLastTag'] = true
 }
 
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven {
+    url 'https://dist.xebialabs.com/public/maven2'
+  }
+}
+
+dependencies {
+  testCompile "com.xebialabs.gradle.plugins:xl-test-api:0.0.3"
+}
+
+task itest(type: Test) {
+    useTestNG() {
+        //set TestNG output dir
+        outputDirectory = file("$project.buildDir//testngOutput")
+        //required to turn on TestNG reports
+        useDefaultListeners = true
+    }
+}
+
 license {
   header rootProject.file('License.md')
-  strictCheck false
+  strictCheck true
   ext.year = Calendar.getInstance().get(Calendar.YEAR)
   ext.name = 'XEBIALABS'
 }
