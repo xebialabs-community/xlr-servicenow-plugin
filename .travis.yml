@@ -12,6 +12,9 @@ env:
   - BROWSER=chrome
   - secure: XPCc0BKkBkxZ0yxadNfHgnO8/z/uiRXDLWVFM2zUgHFdsIO0dGCR9yCZ29oQEZq5mQNTBXHMlWUtyWWIuh0dI6Unqf9t6NXwM3Rrdt+5nrspVuVU8rlbZk5VL4qwlDyCMy0C7Jt6UkGQm07BB2wm1iWwosU85haK66qBKKXCJoA=
   - secure: Y2vWbrGiUn98si2mooO02v00ksleu4GYSZhZHmgznNXvzH1ruPpC+fzE23foSkb2vvM1os86tmxeOy+MCJsPoOLF1hI8cJKm8UjBJZX595Pli8YwJcmtdCLsmT+W1u+iDm7mUlMJtFRr9EkDZ1Kuou7a76N/R8xaBTKJc/n8sUs=
+  - secure: hiYpM0Zbcy0yGc7Ip/AKNhKU5e441V0AEiLoWnPkKLyjG7phUTGBsh9ZM+0vR1UEOzsbqAw5V7Lr/Q639+sz+u2IsEB3Akwre8RXDxzYMAeUPriNi+5D/zT8yR5Y8QQB1vEQ1wQPQW23tPNUQVwytZGeoifjpNZ+f4cyrw1Zn3A=
+  - secure: GqSqGY6Rlz6HhVGRrOL+R0QV4KT43Q2//c1ahnPrkWfAP8bc4Px6z+nKK46Er8J6sIAU1c8eQLQSXHZTOdEPRBC+gw9u8ONpBeSseq0z+CDxgV442r1y+Earp1353GFFDIltqXtrn3N1FOlN76kORxhCtdo+1vJFlbHmvWxCW/Y=
+  - secure: JQIAlH4UJJe29LHEpQ5RhAW2Se8TZj9UnGgDNHILtVlhjEPOyQoIpVot+7Ej29ZE1freCXT6azSx4y7QYZAEVAibswVGsWpfE/Mx71fNfnrQ7poxNPEmwjbpGXBSR96FSvm/I8jODxDIuaY5HB3B+gtk53Fyb4hDkz8EGM/MV9k=
 script:
 - mkdir -p ./xl-licenses
 - http --check-status --print=b --auth $username:$password --json POST https://download.xebialabs.com/api/temporary/xl-release
