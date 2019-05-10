@@ -26,10 +26,7 @@ script:
 - docker stop xlr
 notifications:
   slack:
-    secure: WzdS5sSSQziwbZwqW8nCddRGC8SSrgcPyVn9NbV2MOkqa4mFawQOL05CCOc0RfV7otCCqxsDqXAehuyKzEVA8VrQ1g10Eelppbnv9WxDYzIj1M2MPmyo4RzHK6+aw0KRIujufgYQdxit+N/J2xATnUy+3hiXBQprCnIGXYaNk2w=
-  hipchat:
-    rooms:
-      secure: A0rtcc5iWVOiKodiYxX8DzNn777k2boUWILXtfEKKXqHzxENYaj5EHeMT+kC+2F/rnnjS79fMFD9VU4d/dbjiQH4wzHMPA5gBGpOpb+q0zbLTxt4sYmn+9HqVoIu774ZSBkX1fh5y/MM6qrjUJbPLMuBylM88PhYu95hGL7TW1w=
+    secure: SlqCs/W3tzwLp96aL9yyKr6k0j02CGbAgY3iaO6J5Ba4xM0FCI/r1jncbFGLGDtvhN9EvAY/WWT34k0HR9iIwmTlXXiEdUuzT7yv8NutHuGY00wUdcin6GQkCqZqj9Jou+IJavGrJIUkM18gGPrWIva2SSMY9X9J51CqbKitRM8=
 deploy:
   provider: releases
   api_key:
