@@ -13,11 +13,7 @@ env:
   - secure: pIKhZJtWf+UlvWZGkdB7TIlo0hWiivGSdCQQRpATutgMchkaIwQCnbfndc7gAzy4+jxyOlHnl8fnfpIBQE4cc78KFGB2m07AVcLwotl7ovttDm4OQr/fk/y7XX69exsWh+3kxKM+qmeYIt2SA419/rKD8Ib1Zn7IZ+x9dPKL7tU=
   - secure: FU6UQMUkfzPcfTZP7Cmq8Qi90q9e8aETKzej1IomNhagvM4T7ii9AWgD9ZM79bQiEYpIZgouUNUdImUc4u5uaOsACP3Kzyc3VshGY1T9oZm4ZDShHEyM4ywg27oDoGVfJcLv47xmUmTC7gObg6kgFCb3rKXOgq2DC1QtnDoLKwM=
 script:
-- curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest
-  | grep "browser_download_url.*linux64.tar.gz"
-  | cut -d: -f 2,3
-  | tr -d \"
-  | wget -qi -
+- curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep "browser_download_url.*linux64.tar.gz" | cut -d: -f 2,3 | tr -d \" | wget -qi -
 - mkdir geckodriver
 - tar -xzf *linux64.tar.gz -C geckodriver
 - export PATH=$PATH:$PWD/geckodriver
