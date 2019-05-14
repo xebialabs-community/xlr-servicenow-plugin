@@ -24,6 +24,7 @@ script:
 - docker logs xlr
 - "./gradlew itest"
 - docker stop xlr
+- cat /home/travis/build/xebialabs-community/xlr-servicenow-plugin/build/reports/tests/itest/index.html
 notifications:
   slack:
     secure: SlqCs/W3tzwLp96aL9yyKr6k0j02CGbAgY3iaO6J5Ba4xM0FCI/r1jncbFGLGDtvhN9EvAY/WWT34k0HR9iIwmTlXXiEdUuzT7yv8NutHuGY00wUdcin6GQkCqZqj9Jou+IJavGrJIUkM18gGPrWIva2SSMY9X9J51CqbKitRM8=
