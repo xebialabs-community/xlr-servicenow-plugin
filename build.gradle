@@ -39,6 +39,7 @@ dependencies {
 
 task itest(type: Test) {
     useTestNG() {
+        systemProperty "CHROME_HEADLESS_MODE", findProperty("CHROME_HEADLESS_MODE")
         //set TestNG output dir
         outputDirectory = file("$project.buildDir//testngOutput")
         //required to turn on TestNG reports
