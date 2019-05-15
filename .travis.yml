@@ -13,18 +13,7 @@ env:
   - secure: pIKhZJtWf+UlvWZGkdB7TIlo0hWiivGSdCQQRpATutgMchkaIwQCnbfndc7gAzy4+jxyOlHnl8fnfpIBQE4cc78KFGB2m07AVcLwotl7ovttDm4OQr/fk/y7XX69exsWh+3kxKM+qmeYIt2SA419/rKD8Ib1Zn7IZ+x9dPKL7tU=
   - secure: FU6UQMUkfzPcfTZP7Cmq8Qi90q9e8aETKzej1IomNhagvM4T7ii9AWgD9ZM79bQiEYpIZgouUNUdImUc4u5uaOsACP3Kzyc3VshGY1T9oZm4ZDShHEyM4ywg27oDoGVfJcLv47xmUmTC7gObg6kgFCb3rKXOgq2DC1QtnDoLKwM=
 script:
-- mkdir -p ./xl-licenses
-- http --check-status --print=b --auth $username:$password --json POST https://download.xebialabs.com/api/temporary/xl-release
-  firstName=xlc lastName=xlc email=xlc@xebialabs.com company=xebialabs | jq --raw-output
-  '.license' > ./xl-licenses/xl-release-license.lic
-- "./gradlew clean assemble"
-- docker run --rm -d -v $PWD/build/libs/.:/opt/xlr/server/plugins/__local__ -v $PWD/xl-licenses:/license
-  -p 5516:5516 --name xlr xebialabsunsupported/docker-xlr:8.6.2
-- sleep 90
-- docker logs xlr
-- "./gradlew itest -PCHROME_HEADLESS_MODE=true"
-- docker stop xlr
-- cat /home/travis/build/xebialabs-community/xlr-servicenow-plugin/build/reports/tests/itest/index.html
+- "./travis-ci.sh"
 notifications:
   slack:
     secure: SlqCs/W3tzwLp96aL9yyKr6k0j02CGbAgY3iaO6J5Ba4xM0FCI/r1jncbFGLGDtvhN9EvAY/WWT34k0HR9iIwmTlXXiEdUuzT7yv8NutHuGY00wUdcin6GQkCqZqj9Jou+IJavGrJIUkM18gGPrWIva2SSMY9X9J51CqbKitRM8=
