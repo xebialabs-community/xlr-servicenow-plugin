@@ -13,10 +13,11 @@ services:
     image: xebialabs/xl-release:8.6.2
     container_name: xlr
     volumes:
-      - ~/xl-licenses/xl-release-license.lic:/opt/xl-release-server/default-conf/xl-release-license.lic
+      - ./../../../../xl-licenses/xl-release-license.lic:/opt/xl-release-server/default-conf/xl-release-license.lic
       - ./../../../../build/libs/${plugin_jar}:/opt/xl-release-server/default-plugins/__local__/${plugin_jar}
     environment:
       - ADMIN_PASSWORD=admin
+      - ACCEPT_EULA=Y
     ports:
       - "5516:5516"
 
