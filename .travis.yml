@@ -1,9 +1,9 @@
 language: java
 sudo: required
 addons:
+  chrome: stable
   apt:
     packages:
-    - chromium-browser
     - httpie
     - jq
 env:
